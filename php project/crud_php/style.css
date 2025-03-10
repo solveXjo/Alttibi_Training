@@ -42,11 +42,11 @@ label{
     padding: 0;
     /* margin-bottom: 20%; */
 }
-.navbar-brand{
-    width: 80%;
+.navbar-brand img{
+    width: 100%;
     margin: 0 auto;
     display: flex;
-    height: 80%;
+    height: 100%;
 }
 
 
