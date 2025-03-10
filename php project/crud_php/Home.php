@@ -6,7 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-image: url('Background.jpg');">
-    <h2>this is the home page</h2>
+<body>
+    <h2>Home</h2>
+    <?php require 'Partials/nav.php' ?>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit </p>
 </body>
 </html>
