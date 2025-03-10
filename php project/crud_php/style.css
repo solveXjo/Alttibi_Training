@@ -1,0 +1,34 @@
+
+h2{
+    text-align: center;
+    justify-content: center;
+    color: red;
+    margin: 1em 0;
+}
+form{
+    /* display: flex; */
+    margin: 0 auto;
+    width: 50%;
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    background-color: #f9f9f9;
+    justify-content: center;
+}
+
+
+input{
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border-radius: 0.5em;
+    border: 1px solid #CCC;
+}
+
+label{
+    justify-content: center;
+    display: block;
+    margin: 0.5em 0 0.5em 0;
+    font-weight: bold;
+    font-size: 1.2em;
+}
