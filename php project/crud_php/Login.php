@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Login</title>
 </head>
-<body style="background-image: url('Background.jpg');">
+<body style="background-image: url('images/Background.jpg');">
 
 <h2>Login</h2>
 <form action="" method="post">
