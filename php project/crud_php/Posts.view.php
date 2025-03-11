@@ -46,9 +46,9 @@
 
                     <form method="post" action="comment.php">
                         <input type="hidden" name="post_id" value="<?= $post['id']; ?>">
-                        <textarea name="comment" placeholder="Write a comment..." required></textarea>
+                        <textarea name="comment" placeholder="Write a comment..."></textarea>
                         <button type="submit" name="submit" class="btn">
-                            <i class="fa fa-pen-to-square"></i> Post Comment
+                            <i class="fa fa-pen-to-square"></i> Comment
                         </button>
                     </form>
                     </li>

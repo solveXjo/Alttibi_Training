@@ -21,11 +21,20 @@ class PostRepository {
         $stmt->execute([$postId, $userId, $comment]);
         return $stmt->rowCount() > 0;
     }
+    // public function getAllComments($postId) {
+    //     $query = "SELECT id, post_id, comment, created_at FROM comments WHERE post_id = :post_id ORDER BY created_at DESC";
+    //     return $this->db->query($query, [':post_id' => $postId])->fetchAll();
+    // }
     public function getAllComments($postId) {
-        $query = "SELECT id, post_id, comment, created_at FROM comments WHERE post_id = :post_id ORDER BY created_at DESC";
-        return $this->db->query($query, [':post_id' => $postId])->fetchAll();
+        $stmt = $this->db->connection->prepare("
+            SELECT comments.*, users.name 
+            FROM comments 
+            INNER JOIN users ON comments.user_id = users.id 
+            WHERE post_id = ?
+        ");
+        $stmt->execute([$postId]);
+        return $stmt->fetchAll();
     }
-
     public function getCommentById($commentId) {
         $stmt = $this->db->connection->prepare("SELECT * FROM comments WHERE id = ?");
         $stmt->execute([$commentId]);
