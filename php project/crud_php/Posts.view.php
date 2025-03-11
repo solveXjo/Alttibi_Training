@@ -30,6 +30,27 @@
                                 <i class="fa fa-heart"></i> <?= htmlspecialchars($post['likes']); ?>
                             </button>
                         </form>
+                        <?php
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'], $_POST['comment'])) {
+                                $post_id = $_POST['post_id'];
+                                $comment = $_POST['comment'];
+                                $user_id = 1;
+                                $query = "INSERT INTO comments (post_id, user_id, comment) VALUES (?, ?, ?)";
+                                $stmt = $db->connection->prepare($query);
+                                $stmt->execute([$post_id, $user_id, $comment]);
+
+                                header("Location: Home.php");
+                                exit();
+                            } ?>
+
+
+                    <form method="post" action="comment.php">
+                        <input type="hidden" name="post_id" value="<?= $post['id']; ?>">
+                        <textarea name="comment" placeholder="Write a comment..." required></textarea>
+                        <button type="submit" name="submit" class="btn">
+                            <i class="fa fa-pen-to-square"></i> Post Comment
+                        </button>
+                    </form>
                     </li>
                 <?php endforeach; ?>
             </ul>

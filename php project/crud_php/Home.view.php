@@ -1,18 +1,27 @@
 <?php
-    require 'config.php';
-    require 'Database.php';
+require 'config.php';
+require 'Database.php';
 
-    $db = new Database(require 'config.php');
+session_start(); 
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $caption = ($_POST['caption']);
-        $query = "INSERT INTO posts (caption, likes, created_at) VALUES (:caption, 0, NOW())";
-        $stmt = $db->connection->prepare($query);
-        $stmt->execute([
-            'caption' => $caption
-        ]);
-        header("Location: Posts.php");
-        exit();
+$db = new Database(require 'config.php');
 
-        }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SESSION['user_id'])) {
+        die("Error: You must be logged in to post.");
+    }
+
+    $caption = ($_POST['caption']);
+    $user_id = $_SESSION['user_id']; 
+
+    $query = "INSERT INTO posts (user_id, caption, likes, created_at) VALUES (:user_id, :caption, 0, NOW())";
+    $stmt = $db->connection->prepare($query);
+    $stmt->execute([
+        'user_id' => $user_id,
+        'caption' => $caption
+    ]);
+
+    header("Location: Posts.php");
+    exit();
+}
 ?>

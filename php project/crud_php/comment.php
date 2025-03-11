@@ -1,19 +1,75 @@
-<!-- <?php
-require 'config.php';
-require 'Database.php';
-
-$db = new Database(require 'config.php');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'], $_POST['comment'])) {
-    $post_id = $_POST['post_id'];
-    $comment = $_POST['comment'];
-    $user_id = 1; // Change this to the actual logged-in user ID
-
-    $query = "INSERT INTO comments (post_id, user_id, comment) VALUES (?, ?, ?)";
-    $stmt = $db->connection->prepare($query);
-    $stmt->execute([$post_id, $user_id, $comment]);
-
-    header("Location: Home.php");
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit();
 }
-?> -->
+?>
+
+<?php
+require 'config.php';
+require 'Database.php';
+require 'PostRepository.php';
+
+$db = new Database(require 'config.php');
+$postRepo = new PostRepository($db);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'], $_POST['comment'])) {
+    $postId = filter_input(INPUT_POST, 'post_id', FILTER_VALIDATE_INT);
+    $commentText = ($_POST['comment']);
+
+    if ($postId && !empty($commentText)) {
+        $userId = $_SESSION['user_id'];
+        $postRepo->addComment($postId, $userId, $commentText);
+        
+        header("Location: comment.php?post_id=" . $postId);
+        exit();
+    }
+}
+
+$postId = filter_input(INPUT_GET, 'post_id', FILTER_VALIDATE_INT);
+$comments = $postId ? $postRepo->getAllComments($postId) : [];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
+</head>
+<body class='background'>
+    <?php require 'Partials/nav.php'; ?>
+
+    <div class="container">
+        <h2>Comments</h2>
+        <?php if (!empty($comments)) : ?>
+            <ul class="list-group">
+                <?php foreach ($comments as $comment) : ?>
+        <li class="list-group-item">
+            <p><?= htmlspecialchars($comment['comment']) ?></p>
+            <small>
+                <!--  -->
+                at <?= htmlspecialchars($comment['created_at']) ?>
+                
+                <?php if ($_SESSION['id'] == $comment['user_id']) : ?>
+                    <div class="comment-actions">
+                        <button class="btn btn-sm btn-edit" data-commentid="<?= $comment['id'] ?>">Edit</button>
+                        <button class="btn btn-sm btn-delete" data-commentid="<?= $comment['id'] ?>">Delete</button>
+                    </div>
+                <?php endif; ?>
+            </small>
+        </li>
+    <?php endforeach; ?>
+            </ul>
+        <?php else : ?>
+            <p>No comments found.</p>
+        <?php endif; ?>
+        <a href="Home.php" class="btn btn-default">Back to Posts</a>
+    </div>
+</body>
+</html>

@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     }
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
+    $postId = filter_var($_POST['post_id'], FILTER_VALIDATE_INT);
+    if ($postId !== false) {
+        $postRepo->getAllComments($postId);
+    }
+}
+
 $posts = $postRepo->getAllPosts();
 
 require 'Posts.view.php';
