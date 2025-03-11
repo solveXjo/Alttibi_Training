@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require 'config.php';
 require 'Database.php';
 
@@ -16,4 +16,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'], $_POST['co
     header("Location: Home.php");
     exit();
 }
-?>
+?> -->

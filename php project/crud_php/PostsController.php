@@ -14,5 +14,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
 }
 
 $posts = $postRepo->getAllPosts();
-
-require 'Posts.view.php';
