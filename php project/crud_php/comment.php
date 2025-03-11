@@ -5,13 +5,13 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$userId = $_SESSION['user_id']; // Set user ID for all requests
+$userId = $_SESSION['user_id'];
 
-require 'config.php';
-require 'Database.php';
-require 'PostRepository.php';
-
-$db = new Database(require 'config.php');
+require_once  'config.php';
+require_once  'Database.php';
+require_once  'PostRepository.php';
+$config = require 'config.php';
+$db = new Database($config);
 $postRepo = new PostRepository($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'], $_POST['comment'])) {
@@ -56,10 +56,13 @@ $comments = $postId ? $postRepo->getAllComments($postId) : [];
                             
                             <?php if ($userId === $comment['user_id']) : ?>
                                 <div class="comment-actions">
-                                    <button class="btn btn-sm btn-edit" data-commentid="<?= $comment['id'] ?>">
+                                    <button class="btn btn-sm btn-edit" data-commentid="<?= $comment['id'] ?>"> 
+         
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
                                     <button class="btn btn-sm btn-danger btn-delete" data-commentid="<?= $comment['id'] ?>">
+                                        <?php
+                                            ?> 
                                         <i class="fa fa-trash"></i> Delete
                                     </button>
                                 </div>
