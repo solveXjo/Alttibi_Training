@@ -6,7 +6,6 @@ class UserRepository {
         $this->db = $db;
     }
 
-    // Fetch user data with image path
     public function getUserById($userId) {
         $query = "
             SELECT users.id, users.name, users.age, users.email, media.image_path 
@@ -19,7 +18,6 @@ class UserRepository {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Update user details
     public function updateUser($userId, $name, $age, $email, $password = null) {
         $query = "UPDATE users SET name = :name, age = :age, email = :email";
         $params = [':name' => $name, ':age' => $age, ':email' => $email];
@@ -36,11 +34,9 @@ class UserRepository {
         $this->db->query($query, $params);
     }
 
-    // Update or insert image path in the media table
     public function updateImage($userId, $imagePath) {
-        // Check if the user already has an image in the media table
-        $checkQuery = "SELECT COUNT(*) FROM media WHERE user_id = :user_id";
-        $stmt = $this->db->connection->prepare($checkQuery);
+        $query2 = "SELECT COUNT(*) FROM media WHERE user_id = :user_id";
+        $stmt = $this->db->connection->prepare($query2);
         $stmt->execute(['user_id' => $userId]);
         $exists = $stmt->fetchColumn();
 
