@@ -6,17 +6,24 @@ class UserRepository {
         $this->db = $db;
     }
 
+    // Fetch user data with image path
     public function getUserById($userId) {
-        $query = "SELECT id, name, age, email FROM users WHERE id = :id";
-        $stmt = $this->db->query($query, [':id' => $userId]);
-        return $stmt->fetch();
+        $query = "
+            SELECT users.id, users.name, users.age, users.email, media.image_path 
+            FROM users 
+            LEFT JOIN media ON users.id = media.user_id 
+            WHERE users.id = :id
+        ";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute(['id' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Update user details
     public function updateUser($userId, $name, $age, $email, $password = null) {
         $query = "UPDATE users SET name = :name, age = :age, email = :email";
         $params = [':name' => $name, ':age' => $age, ':email' => $email];
 
-       
         if ($password) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $query .= ", password = :password";
@@ -29,25 +36,21 @@ class UserRepository {
         $this->db->query($query, $params);
     }
 
+    // Update or insert image path in the media table
+    public function updateImage($userId, $imagePath) {
+        // Check if the user already has an image in the media table
+        $checkQuery = "SELECT COUNT(*) FROM media WHERE user_id = :user_id";
+        $stmt = $this->db->connection->prepare($checkQuery);
+        $stmt->execute(['user_id' => $userId]);
+        $exists = $stmt->fetchColumn();
 
-    public function updateImage($image){
-        $query = "SELECT media set image_path = :image_path";
-        $params = [':image_path' => $image_path];
+        if ($exists) {
+            $query = "UPDATE media SET image_path = :image_path WHERE user_id = :user_id";
+        } else {
+            $query = "INSERT INTO media (user_id, image_path) VALUES (:user_id, :image_path)";
+        }
 
-        $query .= " WHERE id = :id";
-        $params[':id'] = $userId;    
-
-
-        $this->db->query($query, $params);
-
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute(['user_id' => $userId, 'image_path' => $imagePath]);
     }
-
-
-    // public function deleteUser($userId) {
-    // $this->db->query("DELETE from posts where user_id = :user_id", [':user_id'=>$userId]);
-
-    //     $this->db->query("DELETE FROM comments WHERE user_id = :user_id", [':user_id' => $userId]);
-
-    //     $this->db->query("DELETE FROM users WHERE id = :id", [':id' => $userId]);
-    // }
 }
