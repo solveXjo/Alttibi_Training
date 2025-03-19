@@ -1,4 +1,5 @@
 <?php
+
 class PostRepository {
     private $db;
 
@@ -7,71 +8,62 @@ class PostRepository {
     }
 
     public function getAllPosts() {
-        $query = "SELECT * from posts order by id desc";
+        $query = "SELECT posts.*, users.name FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC";
         return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function incrementLikes($postId) {
-        $query = "SELECT liked from posts WHERE id = :id";
-        $result = $this->db->query($query, [':id' => $postId]);
-        $currentStatus = $result->fetchColumn();
-    
+        $query = "SELECT liked FROM posts WHERE id = ?";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute([$postId]);
+        $currentStatus = $stmt->fetchColumn();
+
         $newStatus = $currentStatus ? 0 : 1;
-    
-        $query = "UPDATE posts set likes = likes + :increment, liked = :liked WHERE id = :id";
-        $this->db->query($query, [
-            ':increment' => $newStatus ? 1 : -1,
-            ':liked' => $newStatus,
-            ':id' => $postId
+
+        $query = "UPDATE posts SET likes = likes + ?, liked = ? WHERE id = ?";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute([
+            $newStatus ? 1 : -1, 
+            $newStatus, 
+            $postId
         ]);
     }
 
-    public function removePost(){
+    public function removePost($postId) {
+        $stmt = $this->db->connection->prepare("DELETE FROM comments WHERE post_id = ?");
+        $stmt->execute([$postId]);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
-            $commentId = filter_input(INPUT_POST, 'comment_id', FILTER_VALIDATE_INT);
+        $stmt = $this->db->connection->prepare("DELETE FROM posts WHERE id = ?");
+        $stmt->execute([$postId]);
 
-            if ($commentId) {
-                $postRepo->deleteComment($commentId);
-                header("Location: comment.php?post_id=" . $_GET['post_id']);
-                exit();
-            }
-        }
+        return $stmt->rowCount() > 0; 
     }
-    public function addComment($postId, $userId, $comment) {
-        $query = "INSERT INTO comments (post_id, user_id, comment) VALUES (?, ?, ?)";
+
+    public function addComment($postId, $userId, $comment, $parentId = null) {
+        $query = "INSERT INTO comments (post_id, user_id, comment, parent_comment_id) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->connection->prepare($query);
-        $stmt->execute([$postId, $userId, $comment]);
+        $stmt->execute([$postId, $userId, $comment, $parentId]);
         return $stmt->rowCount() > 0;
     }
 
     public function getAllComments($postId) {
-        $stmt = $this->db->connection->prepare("
-            SELECT comments.*, users.name 
-            FROM comments 
-            INNER JOIN users ON comments.user_id = users.id 
-            WHERE post_id = ?
-        ");
+        $query = "SELECT comments.*, users.name from comments INNER JOIN users on comments.user_id = users.id where post_id = ? ORDER BY created_at asc";
+        $stmt = $this->db->connection->prepare($query);
         $stmt->execute([$postId]);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getCommentById($commentId) {
-        $stmt = $this->db->connection->prepare("SELECT * FROM comments WHERE id = ?");
-        $stmt->execute([$commentId]);
-        return $stmt->fetch();
-    }
-    
+
     public function updateComment($commentId, $newText) {
-        $stmt = $this->db->connection->prepare("UPDATE comments SET comment = ? WHERE id = ?");
+        $query = "UPDATE comments SET comment = ? WHERE id = ?";
+        $stmt = $this->db->connection->prepare($query);
         $stmt->execute([$newText, $commentId]);
         return $stmt->rowCount() > 0;
     }
-    
+
     public function deleteComment($commentId) {
-        $stmt = $this->db->connection->prepare("DELETE FROM comments WHERE id = ?");
-        $stmt->execute([$commentId]);
+        $query = "DELETE FROM comments WHERE id = ? OR parent_comment_id = ?";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute([$commentId, $commentId]);
         return $stmt->rowCount() > 0;
     }
-
 }
-?>

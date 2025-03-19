@@ -18,6 +18,17 @@ h2{
     margin: 1em 0;
 }
 
+h3{
+    text-align: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+
+i{
+    color: white;
+}
+
 /* form{
     margin: auto;
     margin-top: 1%;
@@ -29,6 +40,28 @@ h2{
     justify-content: center;
 } */
 
+
+/* container login & signup */
+
+.container{
+    background-color: white;
+    border: 1px;
+    border-radius: 10px;
+    /* padding: 15px; */
+    margin: 0;
+    max-width: fit-content;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 1em;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    
+
+
+}
 
 
 /* home page */
@@ -50,12 +83,42 @@ form button{
     background: var(--primary-color);
     color: #fff;
     border-radius: 5px;
-    cursor: pointer;
 }
-
+/* 
 form button:hover{
     background-color: var(--hover);
     color: var(--hover-text);
+} */
+
+
+.btn.btn-sm.btn-success{
+
+    margin: 0;
+    margin-left: 20%;
+    justify-content: center;
+    display: flex;
+    background-color: #f9f9f9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.btn.btn-sm.btn-success:hover{
+    background-color: green;
+    color: white;
+}
+.btn.btn-sm.btn-danger{
+    width: 108.05px;
+    margin: 0;
+    justify-content: center;
+    display: flex;
+    background-color: #f9f9f9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn.btn-sm.btn-danger:hover{
+    background-color: red;
 }
 
 .navbar {
@@ -89,7 +152,7 @@ input[type=text], input[type=email], input[type=password], input[type=number] {
 button[type=submit], button[type=button] {
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    /* margin: 8px 0; */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -230,8 +293,10 @@ label{
 }
 
 
-/* end of post stylr */
+/* end of post style */
 
+
+/*  */
 
 
 .content {
@@ -256,7 +321,7 @@ p {
 }
 
 
-.btn {
+/* .btn {
     padding: 10px 15px;
     border: none;
     background: var(--primary-color);
@@ -270,7 +335,7 @@ p {
     background: var(--hover);
     color: var(--hover-text);
 
-}
+} */
 
 
 /* profile page */
@@ -303,10 +368,29 @@ p {
     width: 100%;
     margin-top: 10px;
 }
+.comment-btn{
+    background-color: white;
+
+}
+
+.fa-pencil-square-o{
+color: white;}
+
 .btn-danger {
     width: 100%;
     margin-top: 10px;
+    background-color: white;
+    
 }
+
+.fa-trash{
+    color: var(--primary-color);
+}
+
+button i:hover{
+    color:white;
+}
+
 .alert {
     margin-bottom: 20px;
 }
@@ -361,8 +445,13 @@ p {
 }
 
 .btn-success {
+    background-color: none;
     justify-content: center;
 margin-left: 150px;
+}
+
+.btn-success i{
+    color:var(--primary-color)
 }
 
 .btn-delete {
@@ -375,7 +464,8 @@ margin-left: 150px;
 
 .list-group-item {
     position: relative;
-    padding: 1em;
+    padding: 2em;
+    margin-bottom: 1em;
 }
 
 .list-group-item small {
@@ -386,8 +476,19 @@ margin-left: 150px;
 }
 
 
+.fa-heart{
+    color: var(--primary-color);
+}
+
+.fa-heart:hover{
+    color: red;
+}
 .fa-heart.liked {
     color: red;
+}
+
+.fa-heart.liked:hover {
+    color: var(--primary-color);
 }
 
 

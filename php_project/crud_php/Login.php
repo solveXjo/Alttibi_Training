@@ -17,8 +17,9 @@
 <body class='background'>
 
 <h2>Login</h2>
-<form action="" method="post" class="login">
-<label for="">email</label>
+<div class="container">
+ <form action="" method="post" class="login">
+    <label for="">email</label>
     <input type="email" name="email" placeholder="Enter email"><br>
     <label for="">Password</label>
 
@@ -27,7 +28,9 @@
     <br>
     <input class="btn btn-primary" type="submit" value="Submit">
     <p>Don't have an account? <a href="index.php">Signup</a></p>
+ </form>
 
-</form>
+</div>
+
 </body>
 </html>

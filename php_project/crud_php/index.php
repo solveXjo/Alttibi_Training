@@ -16,28 +16,30 @@
 </head>
 <body class='background'>
 <h2>Signup</h2>
-<form action="upload.php" method="post" enctype="multipart/form-data">
+<div class = "container">
+    <form action="upload.php" method="post" enctype="multipart/form-data">
 
-    <label for="name">Name</label>
-    <input type="text" name="name" placeholder="Enter name">
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Enter name">
 
-    <label for="age">Age</label>
-    <input type="number" name="age" placeholder="Enter age">
+        <label for="age">Age</label>
+        <input type="number" name="age" placeholder="Enter age">
 
-    <label for="email">Email</label>
-    <input type="email" name="email" placeholder="Enter email">
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Enter email">
 
-    <label for="password">Password</label>
-    <input type="password" name="password" placeholder="Enter password">
-    <label for="image">Upload Profile Image:</label>
-    <input type="file" name="fileToUpload" id="fileToUpload">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Enter password">
+        <label for="image">Upload Profile Image:</label>
+        <input type="file" name="fileToUpload" id="fileToUpload">
 
-    <input type="hidden" name="submit" value="Upload Image">
+        <input type="hidden" name="submit" value="Upload Image">
 
-    <button class="btn btn-primary" type="submit">Signup</button>
+        <button class="btn btn-primary" type="submit">Signup</button>
 
-    <p>Already have an account? <a href="Login.php">Login</a></p>
+        <p>Already have an account? <a href="Login.php">Login</a></p>
 
-</form>
+    </form>
+</div>
 </body>
 </html>
