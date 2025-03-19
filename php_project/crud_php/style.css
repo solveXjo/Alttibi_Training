@@ -29,22 +29,13 @@ i{
     color: white;
 }
 
-/* form{
-    margin: auto;
-    margin-top: 1%;
-        width: 50%;
-    padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
-    background-color: #f9f9f9;
-    justify-content: center;
-} */
+
 
 
 /* container login & signup */
 
 .container{
-    background-color: white;
+    background-color: #f9f9f9;
     border: 1px;
     border-radius: 10px;
     /* padding: 15px; */
@@ -84,11 +75,6 @@ form button{
     color: #fff;
     border-radius: 5px;
 }
-/* 
-form button:hover{
-    background-color: var(--hover);
-    color: var(--hover-text);
-} */
 
 
 .btn.btn-sm.btn-success{
@@ -321,21 +307,6 @@ p {
 }
 
 
-/* .btn {
-    padding: 10px 15px;
-    border: none;
-    background: var(--primary-color);
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
-.btn:hover {
-    background: var(--hover);
-    color: var(--hover-text);
-
-} */
 
 
 /* profile page */
