@@ -71,23 +71,24 @@ $comments = $postId ? $postRepo->getAllComments($postId) : [];
             <ul class="list-group">
                 <?php foreach ($comments as $comment) : ?>
                     <li class="list-group-item">
-                        <p><?= htmlspecialchars($comment['comment']) ?></p>
+                        <strong><p><?= htmlspecialchars($comment['comment']) ?></p></strong>
+                        
                         <small>
-                            Posted by <?= htmlspecialchars($comment['name']) ?> 
+                            Posted by 
+                            <strong><?= htmlspecialchars($comment['name']) ?> </strong>
+                            <br>
                             at <?= htmlspecialchars($comment['created_at']) ?>
                             
                             <?php if ($userId === $comment['user_id']) : ?>
                                 <div class="edit_form">
-
-
                                     <form method="POST" action="comment.php?post_id=<?= $postId ?>" > 
                                         <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
                                         <textarea name="new_comment"><?= htmlspecialchars($comment['comment']) ?></textarea>
-                                        <button type="submit" name="edit_comment" class="btn btn-sm btn-success">
+                                        <button type="submit" name="edit_comment" class="btn btn-sm btn-success" >
                                             <i class="fa fa-edit"></i> Save Edit
                                         </button>
                                     </form>
-
+                            
                                     <form method="POST" action="comment.php?post_id=<?= $postId ?>" style="display:inline;">
                                         <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
                                         <button type="submit" name="delete_comment" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">

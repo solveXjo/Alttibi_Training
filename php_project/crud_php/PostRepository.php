@@ -25,6 +25,19 @@ class PostRepository {
             ':id' => $postId
         ]);
     }
+
+    public function removePost(){
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
+            $commentId = filter_input(INPUT_POST, 'comment_id', FILTER_VALIDATE_INT);
+
+            if ($commentId) {
+                $postRepo->deleteComment($commentId);
+                header("Location: comment.php?post_id=" . $_GET['post_id']);
+                exit();
+            }
+        }
+    }
     public function addComment($postId, $userId, $comment) {
         $query = "INSERT INTO comments (post_id, user_id, comment) VALUES (?, ?, ?)";
         $stmt = $this->db->connection->prepare($query);

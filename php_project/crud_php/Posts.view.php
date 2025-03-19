@@ -12,19 +12,20 @@
     <title>Posts</title>
 </head>
 <body class='background'>
-    <?php require 'Partials/nav.php'; ?>
-    <div class="hi">
+    <?php require 'Partials/nav.php';?>
+    <div class="container">
      
         <h2>All Posts</h2>
         <?php if (count($posts) > 0) : ?>
-            <ul class="list-group">
+            <ul>
                 <?php foreach ($posts as $post) : ?>
                     <li class="list-group-item">
 
 
                         <div class="username">
-                        <h3><?=$post['name']?></h3>
-                        </div>
+                            <h3><?=$post['name']?></h3>
+                       </div>
+       
 
 
 
@@ -36,7 +37,7 @@
 
                         <div class="post-actions">
 
-
+                            
                             <form method="post" action="" class="like-form">
                                 <input type="hidden" name="post_id" value="<?= $post['id']; ?>">
                                 <button type="submit" name="like" class="btn like-btn">
@@ -53,6 +54,13 @@
                                     <i class="fa fa-pencil-square-o"></i> Comment
                                 </button>
                             </form>
+
+                            <form method="POST" action="comment.php?post_id=<?= $postId ?>" style="display:inline;">
+                                        <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
+                                        <button type="submit" name="delete_comment" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </form>
 
                             
                         </div>

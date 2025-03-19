@@ -15,8 +15,8 @@
   
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 0;">
   <div class="container-fluid" style="background: #336D82">
-    <a class="navbar-brand" href="home.php">
-      <img src="images/Solvex Logo.png" alt="">
+    <a class="navbar-brand" href="home.php" style="margin: 0;">
+      <img src="images/Solvex Logo.png" alt="" style="margin: 0;">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="index.php">logout</a>
+          <a class="nav-link" href="index.php" style="color:white;">logout</a>
         </li>
       </ul>
     </div>

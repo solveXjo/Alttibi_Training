@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $userRepo->updateUser($userId, $name, $age, $email, $password);
 
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['image'])) {
             $file = $_FILES['image'];
             $fileName = basename($file['name']);
             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
@@ -38,15 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($file['tmp_name'], $fileDestination)) {
                     $userRepo->updateImage($userId, $newFileName);
                     $success = "Profile updated successfully!";
-                } else {
-                    $error = "Failed to upload image.";
-                }
-            } else {
-                $error = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+                } 
+                else $error = "Failed to upload image.";    
+                
             }
-        } else {
-            $success = "Profile updated successfully!";
         }
+        else $success = "Profile updated successfully!";
+        
 
         $user = $userRepo->getUserById($userId);
     }
