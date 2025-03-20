@@ -47,7 +47,7 @@ class PostRepository {
     }
 
     public function getAllComments($postId) {
-        $query = "SELECT comments.*, users.name from comments INNER JOIN users on comments.user_id = users.id where post_id = ? ORDER BY created_at asc";
+        $query = "SELECT comments.*, users.name from comments INNER JOIN users on comments.user_id = users.id where post_id = ? ORDER BY created_at desc";
         $stmt = $this->db->connection->prepare($query);
         $stmt->execute([$postId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

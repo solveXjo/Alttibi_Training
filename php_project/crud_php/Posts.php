@@ -36,6 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment'])) {
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
+    $postId = filter_var($_POST['post_id'], FILTER_VALIDATE_INT);
+
+    if ($postId !== false) {
+        $postRepo->removePost($postId);
+        header("Location: Posts.php");
+        exit();
+    }
+}
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment'])) {
     $commentId = filter_var($_POST['comment_id'], FILTER_VALIDATE_INT);
 

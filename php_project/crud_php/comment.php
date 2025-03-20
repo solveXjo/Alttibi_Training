@@ -15,9 +15,11 @@ $config = require 'config.php';
 $db = new Database($config);
 $postRepo = new PostRepository($db);
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'], $_POST['comment'])) {
-    $postId = filter_input(INPUT_POST, 'post_id', FILTER_VALIDATE_INT);
-    $commentText = trim($_POST['comment']);
+    $postId =  $_POST['post_id'];
+    $commentText = $_POST['comment'];
 
     if ($postId && !empty($commentText)) {
         $postRepo->addComment($postId, $userId, $commentText);

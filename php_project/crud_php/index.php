@@ -30,6 +30,8 @@
 
         <label for="password">Password</label>
         <input type="password" name="password" placeholder="Enter password">
+
+        
         <label for="image">Upload Profile Image:</label>
         <input type="file" name="fileToUpload" id="fileToUpload">
 

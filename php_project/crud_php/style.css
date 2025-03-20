@@ -279,6 +279,21 @@ label{
 }
 
 
+.commet-form textarea {
+    margin-right: 2%;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+    resize: none;
+    font-size: 14px;
+    color: #14171a;
+}
+
+.commet-form textarea::placeholder {
+    color: var(--primary-color);
+}
+
 /* end of post style */
 
 
@@ -446,6 +461,9 @@ margin-left: 150px;
     color: #6c757d;
 }
 
+.fa-arrow-left{
+    color: var(--primary-color);
+}
 
 .fa-heart{
     color: var(--primary-color);
@@ -464,4 +482,10 @@ margin-left: 150px;
 
 
 
+.btn.btn-danger{
+    color: #dc3545;
+}
 
+.btn.btn-danger:hover{
+    color: white;
+}
