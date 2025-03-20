@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
             }
         }
-        else $success = "Profile updated successfully!";
+         $success = "Profile updated successfully!";
         
 
         $user = $userRepo->getUserById($userId);
