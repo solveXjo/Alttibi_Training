@@ -2,6 +2,12 @@
 require_once 'Database.php';
 require_once 'Home.view.php';
 
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,11 +26,13 @@ require_once 'Home.view.php';
 
     <?php require_once 'Partials/nav.php'; ?>
     <h2>Make a post...</h2>
+    <div class="d-flex justify-content-center">
 
-    <form action="" method="post" class="home-form">
+    <form action="" method="post" >
         <label for="">what Do you want to type?</label>
         <input type="text" name="caption" id="caption" placeholder="type..." required>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
 </body>
 </html>

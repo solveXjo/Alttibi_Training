@@ -15,13 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    
+
     $name = 'name';
     $age = 'age';
     $email = 'email';
     $password = $_POST['password'];
 
- 
+
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['error'] = "Invalid email format!";
@@ -43,49 +43,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // if (!isset($_FILES['fileToUpload']) || $_FILES['fileToUpload']['error'] !== UPLOAD_ERR_OK) {
         //     die("Error: No file uploaded or upload failed.");
         // }
-    
+
         $file = $_FILES['fileToUpload'];
         $filename = $file['name'];
-    
+
         $fileTmpName = $file['tmp_name'];
         $fileError = $file['error'];
-    
+
         $filetype = $file['type'];
-    
+
         $fileSize = $file['size'];
-    
+
         // echo "Uploaded file: " . htmlspecialchars($filename);
-    
+
         $fileExt = explode('.', $filename); // split a string by a string to take the extenstion of the file
         $fileActualExt = strtolower(end($fileExt));
-    
+
         $allowed = array('jpg', 'png', 'jpeg');
-    
-        if(!in_array($fileActualExt, $allowed)){
-          echo "you can't upload files from this type.";
-        }
-        else{
-          if($fileError!==0){
-            echo "there was an error!";
-          }
-          else{
-            $fileNameNew = uniqid('', true). '.' .$fileActualExt;
-            $fileDestination = 'uploads/' . $fileNameNew; 
-    
-            $query = "INSERT INTO users (image) VALUES (:image)";
-            $stmt = $db->connection->prepare($query);
-              
-            $stmt->execute([
-                ':image' => $fileNameNew,
-            ]);
-        
-    
-            move_uploaded_file($fileTmpName, $fileDestination); 
-           // header('Location: index.php');
-          }
+
+        if (!in_array($fileActualExt, $allowed)) {
+            echo "you can't upload files from this type.";
+        } else {
+            if ($fileError !== 0) {
+                echo "there was an error!";
+            } else {
+                $fileNameNew = uniqid('', true) . '.' . $fileActualExt;
+                $fileDestination = 'uploads/' . $fileNameNew;
+
+                $query = "INSERT INTO users (image) VALUES (:image)";
+                $stmt = $db->connection->prepare($query);
+
+                $stmt->execute([
+                    ':image' => $fileNameNew,
+                ]);
+
+
+                move_uploaded_file($fileTmpName, $fileDestination);
+                // header('Location: index.php');
+            }
         }
     }
-    
+
 
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -136,46 +134,42 @@ if (isset($_POST['submit'])) {
         echo '<script>alert("You can not upload files of this type.")</script>';
 
         exit();
-    } 
-    
-    else {
+    } else {
         // if ($fileError !== 0) {
         //     echo "There was an error!";
         //     exit();
         // } 
-        
-            $fileNameNew = uniqid('', true) . '.' . $fileActualExt;
-            $fileDestination = 'uploads/' . $fileNameNew;
 
-            $name = $_POST['name'];
-            $age = $_POST['age'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $fileNameNew = uniqid('', true) . '.' . $fileActualExt;
+        $fileDestination = 'uploads/' . $fileNameNew;
 
-            $query = "INSERT INTO users (name, age, email, password) VALUES (:name, :age, :email, :password)";
-            $stmt = $db->connection->prepare($query);
-            $stmt->execute([
-                'name' => $name,
-                'age' => $age,
-                'email' => $email,
-                'password' => $passwordHash
-            ]);
+        $name = $_POST['name'];
+        $age = $_POST['age'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-            $userId = $db->connection->lastInsertId();
+        $query = "INSERT INTO users (name, age, email, password) VALUES (:name, :age, :email, :password)";
+        $stmt = $db->connection->prepare($query);
+        $stmt->execute([
+            'name' => $name,
+            'age' => $age,
+            'email' => $email,
+            'password' => $passwordHash
+        ]);
 
-            $mediaQuery = "INSERT INTO media (user_id, image_path) VALUES (:user_id, :image_path)";
-            $mediaStmt = $db->connection->prepare($mediaQuery);
-            $mediaStmt->execute([
-                'user_id' => $userId,
-                'image_path' => $fileNameNew
-            ]);
+        $userId = $db->connection->lastInsertId();
 
-            move_uploaded_file($fileTmpName, $fileDestination);
+        $mediaQuery = "INSERT INTO media (user_id, image_path) VALUES (:user_id, :image_path)";
+        $mediaStmt = $db->connection->prepare($mediaQuery);
+        $mediaStmt->execute([
+            'user_id' => $userId,
+            'image_path' => $fileNameNew
+        ]);
 
-            header('Location: Login.php');
-            exit();
-        
+        move_uploaded_file($fileTmpName, $fileDestination);
+
+        header('Location: Login.php');
+        exit();
     }
 }
-

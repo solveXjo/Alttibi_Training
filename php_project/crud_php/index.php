@@ -1,47 +1,54 @@
-<?php require 'index.view.php';
+<?php
+
+
+require 'upload.php'; 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php include 'head.php'; ?>
     <link rel="stylesheet" href="style.css">
-
     <title>Signup</title>
 </head>
 <body class='background'>
-<h2>Signup</h2>
-<div class = "container">
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <h2>Signup</h2>
+    <div class="form-container d-flex justify-content-center">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" placeholder="Enter name" class="form-control" value="<?php echo htmlspecialchars($name); ?>">
+                <span class="error"> <?php echo $nameErr; ?></span>
+            </div>
 
-        <label for="name">Name</label>
-        <input type="text" name="name" placeholder="Enter name">
+            <div class="form-group">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" name="age" placeholder="Enter age" class="form-control" value="<?php echo htmlspecialchars($age); ?>">
+                <span class="error"> <?php echo $ageErr; ?></span>
+            </div>
 
-        <label for="age">Age</label>
-        <input type="number" name="age" placeholder="Enter age">
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" placeholder="Enter email" class="form-control" value="<?php echo htmlspecialchars($email); ?>">
+                <span class="error"> <?php echo $emailErr; ?></span>
+            </div>
 
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Enter email">
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" placeholder="Enter password" class="form-control">
+                <span class="error"><?php echo $passwordErr; ?></span>
+            </div>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Enter password">
+            <div class="form-group">
+                <label for="image" class="form-label">Upload Profile Image:</label>
+                <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+                <span class="error"><?php echo $imageErr; ?></span>
+            </div>
 
-        
-        <label for="image">Upload Profile Image:</label>
-        <input type="file" name="fileToUpload" id="fileToUpload">
+            <button type="submit" name="submit" class="btn btn-primary">Signup</button>
 
-        <input type="hidden" name="submit" value="Upload Image">
-
-        <button class="btn btn-primary" type="submit">Signup</button>
-
-        <p>Already have an account? <a href="Login.php">Login</a></p>
-
-    </form>
-</div>
+            <p>Already have an account? <a href="Login.php">Login</a></p>
+        </form>
+    </div>
 </body>
 </html>

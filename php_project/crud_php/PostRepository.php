@@ -66,4 +66,10 @@ class PostRepository {
         $stmt->execute([$commentId, $commentId]);
         return $stmt->rowCount() > 0;
     }
+    public function getUserByEmail($email) {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

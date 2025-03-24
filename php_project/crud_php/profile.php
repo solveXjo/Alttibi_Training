@@ -38,19 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($file['tmp_name'], $fileDestination)) {
                     $userRepo->updateImage($userId, $newFileName);
                     $success = "Profile updated successfully!";
-                } 
-                else $error = "Failed to upload image.";    
-                
+                } else $error = "Failed to upload image.";
             }
         }
-         $success = "Profile updated successfully!";
-        
+        $success = "Profile updated successfully!";
+
 
         $user = $userRepo->getUserById($userId);
     }
 }
 
 $user = $userRepo->getUserById($userId);
-?>
 
-<?php require 'profile.view.php'; ?>
+ require 'profile.view.php'; ?>

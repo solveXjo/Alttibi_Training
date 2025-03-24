@@ -4,6 +4,11 @@
     --hover: #336D82;
 
     --hover-text:#FFF;
+
+    --font: 'Trebuchet MS', sans-serif;
+
+    --label: 'Times New Roman', serif;
+
 }
 .background{
  background-color: var(--secondary-color);   
@@ -12,6 +17,7 @@
 }
 
 h2{
+    font-family: var(--font);
     text-align: center;
     justify-content: center;
     color: var(--primary-color);
@@ -19,6 +25,7 @@ h2{
 }
 
 h3{
+    font-family: var(--font);
     text-align: center;
     justify-content: center;
     color: var(--primary-color);
@@ -34,11 +41,10 @@ i{
 
 /* container login & signup */
 
-.container{
+/* .container{
     background-color: #f9f9f9;
     border: 1px;
     border-radius: 10px;
-    /* padding: 15px; */
     margin: 0;
     max-width: fit-content;
     justify-content: center;
@@ -52,7 +58,7 @@ i{
     
 
 
-}
+} */
 
 
 /* home page */
@@ -69,6 +75,7 @@ i{
 }
 
 form button{
+    font-style: var(--button);
     padding: 10px 15px;
     border: none;
     background: var(--primary-color);
@@ -76,6 +83,10 @@ form button{
     border-radius: 5px;
 }
 
+.btn.btn-primary{
+
+    padding: 10px 25px;
+}
 
 .btn.btn-sm.btn-success{
 
@@ -97,7 +108,7 @@ form button{
     margin: 0;
     justify-content: center;
     display: flex;
-    background-color: #f9f9f9;
+    background-color: white;
     color: white;
     border: none;
     border-radius: 5px;
@@ -149,6 +160,7 @@ button[type=submit], button[type=button] {
 }
 
 label{
+    font-family: var(--label);
     justify-content: center;
     display: block;
     margin: 0.5em 0 0.5em 0;
@@ -203,14 +215,7 @@ label{
     list-style: none;
 }
 
-.list-group-item {
-    background-color: #fff;
-    border: 1px solid #e1e8ed;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Username Section */
 .username h3 {
@@ -327,12 +332,12 @@ p {
 /* profile page */
 
 .profile-container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
-    background: #ffffff;
+    /* background: #ffffff; */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 .profile-image {
     display: flex;

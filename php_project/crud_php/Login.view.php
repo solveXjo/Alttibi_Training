@@ -6,12 +6,23 @@ require 'Database.php';
 $db = new Database(require 'config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    if (empty($email) || empty($password)) {
-        echo "All fields are required!";
-    } else {
+    $emailErr = $passErr = "";
+
+    if(empty($_POST['email'])){
+        $emailErr = "Email is required";
+    }
+    else{
+        $email = $_POST['email'];
+    }
+
+    if(empty($_POST['password'])){
+        $passErr = "Password is required";
+    }
+    else{
+        $password = $_POST['password'];
+    }
+
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $db->connection->prepare($query);
         $stmt->execute(['email' => $email]);
@@ -25,6 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Invalid email or password!";
         }
-    }
+    
 }
 ?>

@@ -1,7 +1,14 @@
 <?php
-require 'config.php';
-require 'Database.php';
-require 'PostRepository.php';
+require_once 'config.php';
+require_once 'Database.php';
+require_once 'PostRepository.php';
+//require_once 'includes/auth_check.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
 
 $db = new Database(require 'config.php');
 $postRepo = new PostRepository($db);
