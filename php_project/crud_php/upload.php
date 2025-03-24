@@ -6,48 +6,60 @@ $db = new Database(require 'config.php');
 
 $nameErr = $emailErr = $passwordErr = $ageErr = $imageErr = '';
 
+$count = 0;
 $name = $age = $email = $password = '';
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+
 
 if (isset($_POST['submit'])) {
-    $name = test_input($_POST['name'] ?? '');
-    $age = test_input($_POST['age'] ?? '');
-    $email = test_input($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $file = $_FILES['fileToUpload'] ?? null;
-    $fileExt = ''; // Initialize $fileExt with a default value
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $file = $_FILES['fileToUpload'];
+    $fileExt = '';
 
     if (empty($name)) {
         $nameErr = "Name is required.";
     } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
         $nameErr = "Name must contain only letters and spaces.";
+    } else {
+        $count++;
     }
+
 
     if (empty($age)) {
         $ageErr = "Age is required.";
     } elseif ($age < 18 || $age > 80) {
         $ageErr = "Age must be between 18 and 80.";
+    } else {
+        $count++;
     }
 
     if (empty($email)) {
         $emailErr = "Email is required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailErr = "Invalid email format.";
-    }
-    elseif ((new PostRepository($db))->getUserByEmail($email)) {
+    } elseif ((new PostRepository($db))->getUserByEmail($email)) {
         $emailErr = "Email already exists.";
+    }
+    else{
+        $count++;
     }
 
     if (empty($password)) {
         $passwordErr = "Password is required.";
     } elseif (strlen($password) < 8) {
         $passwordErr = "Password must be at least 8 characters long.";
+    } elseif (strlen($password) > 16) {
+        $passwordErr = "password must be at mmost 16 char long";
+    }
+    else{
+        $count++;
+    }
+
+    if($count === 4){
+        header('Location: Login.php');
+        exit();
     }
 
     if ($file['error'] == UPLOAD_ERR_OK) {
@@ -87,8 +99,6 @@ if (isset($_POST['submit'])) {
 
             header('Location: Login.php');
             exit();
-        } else {
-            $imageErr = "Failed to upload file.";
         }
     }
 }

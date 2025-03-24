@@ -4,26 +4,27 @@ require_once 'Database.php';
 require_once 'PostRepository.php';
 //require_once 'includes/auth_check.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
 
 
 $db = new Database(require 'config.php');
 $postRepo = new PostRepository($db);
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: index.php");
+//     exit();
+// }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
-    $postId = filter_var($_POST['post_id'], FILTER_VALIDATE_INT);
+    $postId = $_POST['post_id'];
     if ($postId !== false) {
         $postRepo->incrementLikes($postId);
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_comment'])) {
-    $postId = filter_var($_POST['post_id'], FILTER_VALIDATE_INT);
-    $parentId = filter_var($_POST['parent_comment_id'], FILTER_VALIDATE_INT) ?: null;
-    $comment = trim($_POST['comment']);
+    $postId = $_POST['post_id'];
+    $parentId = $_POST['parent_comment_id'];
+    $comment = $_POST['comment'];
 
     if ($postId !== false && !empty($comment)) {
         $postRepo->addComment($postId, $_SESSION['user_id'], $comment, $parentId);
@@ -33,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_comment'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment'])) {
-    $commentId = filter_var($_POST['comment_id'], FILTER_VALIDATE_INT);
-    $newText = trim($_POST['new_comment']);
+    $commentId = $_POST['comment_id'];
+    $newText = $_POST['new_comment'];
 
     if ($commentId !== false && !empty($newText)) {
         $postRepo->updateComment($commentId, $newText);
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
-    $postId = filter_var($_POST['post_id'], FILTER_VALIDATE_INT);
+    $postId = $_POST['post_id'];
 
     if ($postId !== false) {
         $postRepo->removePost($postId);
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment'])) {
-    $commentId = filter_var($_POST['comment_id'], FILTER_VALIDATE_INT);
+    $commentId = $_POST['comment_id'];
 
     if ($commentId !== false) {
         $postRepo->deleteComment($commentId);
