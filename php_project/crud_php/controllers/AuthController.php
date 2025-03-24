@@ -2,14 +2,17 @@
 session_start();
 require '../models/User.php';
 
-class AuthController {
+class AuthController
+{
     private $userModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = new User();
     }
 
-    public function signup() {
+    public function signup()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
             $age = $_POST['age'];
@@ -47,7 +50,6 @@ class AuthController {
 
             $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-            // Create user
             $this->userModel->createUser($name, $age, $email, $passwordHash, $fileNameNew);
 
             $_SESSION['success'] = "Signup successful! Please login.";
@@ -55,23 +57,21 @@ class AuthController {
             exit();
         }
 
-        // Load the signup view
         require '../app/views/auth/signup.php';
     }
 
-    public function login() {
+    public function login()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            // Validate input
             if (empty($email) || empty($password)) {
                 $_SESSION['error'] = "All fields are required!";
                 header("Location: ../public/login.php");
                 exit();
             }
 
-            // Check if user exists
             $user = $this->userModel->findUserByEmail($email);
 
             if (!$user || !password_verify($password, $user['password'])) {
@@ -79,14 +79,11 @@ class AuthController {
                 header("Location: ../public/login.php");
                 exit();
             }
-
-            // Login successful
             $_SESSION['user_id'] = $user['id'];
             header("Location: Home.php");
             exit();
         }
 
-        // Load the login view
         require '../app/views/auth/login.php';
     }
 }

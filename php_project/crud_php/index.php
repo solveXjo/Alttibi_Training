@@ -1,54 +1,103 @@
 <?php
+require 'config.php';
+require_once 'Database.php';
+// require "PostRepository.php";
+$db = new Database(require 'config.php');
+
+$nameErr = $emailErr = $passwordErr = $ageErr = $imageErr = '';
+
+$count = 0;
+$name = $age = $email = $password = '';
 
 
-require 'upload.php'; 
-?>
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $file = $_FILES['fileToUpload'];
+    $fileExt = '';
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php include 'head.php'; ?>
-    <link rel="stylesheet" href="style.css">
-    <title>Signup</title>
-</head>
-<body class='background'>
-    <h2>Signup</h2>
-    <div class="form-container d-flex justify-content-center">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" name="name" placeholder="Enter name" class="form-control" value="<?php echo htmlspecialchars($name); ?>">
-                <span class="error"> <?php echo $nameErr; ?></span>
-            </div>
+    if (empty($name)) {
+        $nameErr = "Name is required.";
+    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
+        $nameErr = "Name must contain only letters and spaces.";
+    } else {
+        $count++;
+    }
 
-            <div class="form-group">
-                <label for="age" class="form-label">Age</label>
-                <input type="number" name="age" placeholder="Enter age" class="form-control" value="<?php echo htmlspecialchars($age); ?>">
-                <span class="error"> <?php echo $ageErr; ?></span>
-            </div>
 
-            <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" placeholder="Enter email" class="form-control" value="<?php echo htmlspecialchars($email); ?>">
-                <span class="error"> <?php echo $emailErr; ?></span>
-            </div>
+    if (empty($age)) {
+        $ageErr = "Age is required.";
+    } elseif ($age < 18 || $age > 80) {
+        $ageErr = "Age must be between 18 and 80.";
+    } else {
+        $count++;
+    }
 
-            <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" placeholder="Enter password" class="form-control">
-                <span class="error"><?php echo $passwordErr; ?></span>
-            </div>
+    if (empty($email)) {
+        $emailErr = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format.";
+    } elseif ((new PostRepository($db))->getUserByEmail($email)) {
+        $emailErr = "Email already exists.";
+    } else {
+        $count++;
+    }
 
-            <div class="form-group">
-                <label for="image" class="form-label">Upload Profile Image:</label>
-                <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
-                <span class="error"><?php echo $imageErr; ?></span>
-            </div>
+    if (empty($password)) {
+        $passwordErr = "Password is required.";
+    } elseif (strlen($password) < 8) {
+        $passwordErr = "Password must be at least 8 characters long.";
+    } elseif (strlen($password) > 16) {
+        $passwordErr = "password must be at mmost 16 char long";
+    } else {
+        $count++;
+    }
 
-            <button type="submit" name="submit" class="btn btn-primary">Signup</button>
+    if ($count === 4) {
+        header('Location: Login.php');
+        exit();
+    }
 
-            <p>Already have an account? <a href="Login.php">Login</a></p>
-        </form>
-    </div>
-</body>
-</html>
+    if ($file['error'] == UPLOAD_ERR_OK) {
+
+        $fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png'];
+
+        if (!in_array($fileExt, $allowed)) {
+            $imageErr = "Only JPG, JPEG, and PNG files are allowed.";
+        }
+    }
+
+    if (empty($nameErr) && empty($ageErr) && empty($emailErr) && empty($passwordErr) && empty($imageErr)) {
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+        $query = "INSERT INTO users (name, age, email, password) VALUES (:name, :age, :email, :password)";
+        $stmt = $db->connection->prepare($query);
+        $stmt->execute([
+            'name' => $name,
+            'age' => $age,
+            'email' => $email,
+            'password' => $passwordHash
+        ]);
+
+        $userId = $db->connection->lastInsertId();
+
+        $fileNameNew = uniqid('', true) . '.' . $fileExt;
+        $fileDestination = 'uploads/' . $fileNameNew;
+
+        if (move_uploaded_file($file['tmp_name'], $fileDestination)) {
+            $mediaQuery = "INSERT INTO media (user_id, image_path) VALUES (:user_id, :image_path)";
+            $mediaStmt = $db->connection->prepare($mediaQuery);
+            $mediaStmt->execute([
+                'user_id' => $userId,
+                'image_path' => $fileNameNew
+            ]);
+
+            header('Location: Login.php');
+            exit();
+        }
+    }
+}
+require 'index.view.php';
