@@ -494,3 +494,8 @@ margin-left: 150px;
 .btn.btn-danger:hover{
     color: white;
 }
+
+
+.error{
+    color: red;
+}

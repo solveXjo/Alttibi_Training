@@ -1,9 +1,10 @@
 <?php
 session_start();
-require 'config.php';
-require 'Database.php';
+$config = require '../../config.php';
+require '../../Database.php';
 
-$db = new Database(require 'config.php');
+$db = new Database($config);
+$invalid = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -31,13 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password'])) {
             
             $_SESSION['user_id'] = $user['id'];
-            header("Location: Home.php");
+            header("Location: ../../Home.php");
             exit();
         } else {
-            echo "Invalid email or password!";
+            $invalid = "Invalid email or password";
         }
     
 }
 
-require 'Login.view.php';
+// require 'views/auth/Login.view.php';
 ?>
+

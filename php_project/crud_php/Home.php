@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        
     ]);
 
-    header("Location: Posts.php");
+    header("Location: ../../Posts.php");
     exit();
 
 

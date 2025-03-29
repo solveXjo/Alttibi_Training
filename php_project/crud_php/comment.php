@@ -9,7 +9,7 @@ $userId = $_SESSION['user_id'];
 
 require_once 'config.php';
 require_once 'Database.php';
-require_once 'PostRepository.php';
+require_once 'models/PostRepository.php';
 
 $config = require 'config.php';
 $db = new Database($config);

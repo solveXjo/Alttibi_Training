@@ -57,7 +57,7 @@
 
             <!-- Password -->
             <div class="mb-3">
-                <label for="password" class="form-label">New Password (leave blank to keep current)</label>
+                <label for="password" class="form-label">New Password</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
 

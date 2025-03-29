@@ -18,6 +18,13 @@ class UserRepository {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getUserByEmail($email) {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function updateUser($userId, $name, $age, $email, $password = null) {
         $query = "UPDATE users SET name = :name, age = :age, email = :email";
         $params = [':name' => $name, ':age' => $age, ':email' => $email];

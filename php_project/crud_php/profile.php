@@ -2,7 +2,7 @@
 session_start();
 require 'config.php';
 require 'Database.php';
-require 'UserRepository.php';
+require 'models/UserRepository.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");

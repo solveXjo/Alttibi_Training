@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<?php include 'head.php'; ?>
+<?php include 'Partials/head.php'; ?>
 
     <title>Comments</title>
 </head>

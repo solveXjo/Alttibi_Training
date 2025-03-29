@@ -1,9 +1,12 @@
 <?php
+// require_once 'config.php';
 class Database {
     public $connection;
 
     public function __construct($config) {
         $dbConfig = $config['database'];
+        // var_dump($config);
+        // die();
 
         $dsn = "mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$dbConfig['dbname']};charset={$dbConfig['charset']}";
 

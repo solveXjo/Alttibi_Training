@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include 'Partials/head.php'; ?>
 
     <title>Posts</title>
 </head>
@@ -46,7 +46,7 @@ session_start();
 
 
                                 <!-- Comment Form -->
-                                <form method="post" action="comment.php" class="comment-form mb-3">
+                                <form method="post" action="../../comment.php" class="comment-form mb-3">
                                     <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                                     <textarea name="comment" placeholder="Write a comment..."></textarea>
                                     <button type="submit" name="submit" class="btn comment-btn">
