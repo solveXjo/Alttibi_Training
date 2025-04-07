@@ -1,14 +1,24 @@
 <?php
-class UserRepository {
+class UserRepository
+{
     private $db;
 
-    public function __construct(Database $db) {
+    public function __construct(Database $db)
+    {
         $this->db = $db;
     }
 
-    public function getUserById($userId) {
+    public function getUserById($userId)
+    {
         $query = "
-            SELECT users.id, users.name, users.age, users.email, media.image_path 
+            SELECT 
+                users.id, 
+                users.name, 
+                users.age, 
+                users.email, 
+                users.bio, 
+                users.location,
+                media.image_path 
             FROM users 
             LEFT JOIN media ON users.id = media.user_id 
             WHERE users.id = :id
@@ -18,16 +28,31 @@ class UserRepository {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getUserByEmail($email) {
+    public function getUserByEmail($email)
+    {
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->db->connection->prepare($query);
         $stmt->execute(['email' => $email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateUser($userId, $name, $age, $email, $password = null) {
-        $query = "UPDATE users SET name = :name, age = :age, email = :email";
-        $params = [':name' => $name, ':age' => $age, ':email' => $email];
+    public function updateUser($userId, $name, $age, $email, $password = null, $bio = null, $location = null)
+    {
+        $query = "UPDATE users SET 
+            name = :name, 
+            age = :age, 
+            email = :email,
+            bio = :bio,
+            location = :location";
+
+        $params = [
+            ':name' => $name,
+            ':age' => $age,
+            ':email' => $email,
+            ':bio' => $bio,
+            ':location' => $location,
+            ':id' => $userId
+        ];
 
         if ($password) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -36,16 +61,30 @@ class UserRepository {
         }
 
         $query .= " WHERE id = :id";
-        $params[':id'] = $userId;
 
-        $this->db->query($query, $params);
+        $stmt = $this->db->connection->prepare($query);
+        return $stmt->execute($params);
     }
 
-    public function updateImage($userId, $imagePath) {
-        $query2 = "SELECT COUNT(*) FROM media WHERE user_id = :user_id";
-        $stmt = $this->db->connection->prepare($query2);
-        $stmt->execute(['user_id' => $userId]);
-        $exists = $stmt->fetchColumn();
+    public function changePassword($userId, $newPassword)
+    {
+
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $query = "UPDATE users SET password = :password WHERE id = :id";
+        $stmt = $this->db->connection->prepare($query);
+        return $stmt->execute([
+            ':password' => $hashedPassword,
+            ':id' => $userId
+        ]);
+    }
+
+    public function updateImage($userId, $imagePath)
+    {
+        // Check if image exists for this user
+        $checkQuery = "SELECT COUNT(*) FROM media WHERE user_id = :user_id";
+        $checkStmt = $this->db->connection->prepare($checkQuery);
+        $checkStmt->execute(['user_id' => $userId]);
+        $exists = $checkStmt->fetchColumn();
 
         if ($exists) {
             $query = "UPDATE media SET image_path = :image_path WHERE user_id = :user_id";
@@ -54,6 +93,40 @@ class UserRepository {
         }
 
         $stmt = $this->db->connection->prepare($query);
-        $stmt->execute(['user_id' => $userId, 'image_path' => $imagePath]);
+        return $stmt->execute([
+            'user_id' => $userId,
+            'image_path' => $imagePath
+        ]);
+    }
+
+    public function getUserImage($userId)
+    {
+        $query = "SELECT image_path FROM media WHERE user_id = :user_id";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute(['user_id' => $userId]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['image_path'] ?? 'default.png';
+    }
+
+    public function deleteUser($userId)
+    {
+        // First delete the media record if it exists
+        $image = $this->getUserImage($userId);
+        if ($image && $image !== 'default.png') {
+            $uploadDir = 'uploads/';
+            if (file_exists($uploadDir . $image)) {
+                unlink($uploadDir . $image);
+            }
+        }
+
+        $query = "DELETE FROM media WHERE user_id = :user_id";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute(['user_id' => $userId]);
+
+        // Then delete the user
+        $query = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->db->connection->prepare($query);
+        return $stmt->execute(['id' => $userId]);
     }
 }

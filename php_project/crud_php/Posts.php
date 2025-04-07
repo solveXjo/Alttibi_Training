@@ -1,8 +1,6 @@
 <?php
-require_once 'config.php';
-require_once 'Database.php';
+
  require_once 'models/PostRepository.php';
-//require_once 'includes/auth_check.php';
 
 
 

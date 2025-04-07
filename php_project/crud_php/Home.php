@@ -1,12 +1,8 @@
 <?php
 session_start();
-// echo "<pre>";
-// print_r($_SESSION);
-// echo "</pre>";
-require 'config.php';
-require_once 'Database.php';
 
-$db = new Database(require 'config.php');
+
+ $db = new Database(require 'config.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['user_id'])) {
         die("Error: You must be logged in to post.");
@@ -38,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        
     ]);
 
-    header("Location: ../../Posts.php");
+    header("Location: /posts");
     exit();
 
 

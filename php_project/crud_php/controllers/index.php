@@ -1,9 +1,8 @@
 <?php
 session_start();
-$config = require '../../config.php';
-require_once '../../Database.php';
 
-$db = new Database($config);
+
+$db = new Database(require 'config.php');
 
 
 
@@ -83,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mediaStmt->execute(['user_id' => $userId, 'image_path' => $fileName]);
         }
 
-        header("Location: ../../views/auth/Login.view.php");
+        header("Location: /Login");
         exit();
     }
 }

@@ -46,7 +46,7 @@
                                 </div>
                             <?php endif; ?>
                         </small>
-                        <a href="Posts.php" class="btn btn-default mt-3">
+                        <a href="/posts" class="btn btn-default mt-3">
                             <i class="fa fa-arrow-left"> Back to Posts</i>
                         </a>
                     </li>
