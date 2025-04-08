@@ -198,7 +198,7 @@
                         alt="Profile Image"
                         class="profile-picture">
                     <label for="image" class="btn" style="margin-top: 70px;">
-                        Change Profile Picture
+                        Change Profile Picture <i class="fa-solid fa-user-pen"></i>
                     </label>
                     <input type="file" id="image" name="image" accept="image/*" style="display: none;"
                         onchange="this.form.submit()">
@@ -271,7 +271,7 @@
 
                     <div class="form-group">
                         <label for="location" class="form-label">Location</label>
-                        <label for="country">Country</label><span style="color: red !important; display: inline; float: none;">*</span>
+                        <label for="country">Country</label>
 
                         <select id="location" name="location" class="form-control">
                             <option value="Afghanistan">Afghanistan</option>
@@ -545,7 +545,6 @@
                     </form>
                 </div>
 
-                <!-- Danger Zone Card -->
                 <div class="profile-card">
                     <h3>Danger Zone</h3>
                     <form method="post" action="">

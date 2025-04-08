@@ -1,11 +1,15 @@
 <?php
-
- require_once 'models/PostRepository.php';
+require_once 'models/PostRepository.php';
 
 
 
 $db = new Database(require 'config.php');
 $postRepo = new PostRepository($db);
+
+require 'models/UserRepository.php';
+
+$userRepo = new UserRepository(($db));
+
 // if (!isset($_SESSION['user_id'])) {
 //     header("Location: index.php");
 //     exit();

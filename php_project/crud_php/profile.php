@@ -29,81 +29,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $error = "Failed to delete account.";
         }
-    } 
-
-
-    elseif (isset($_POST['change_password'])) {
+    } elseif (isset($_POST['change_password'])) {
         $newPassword = $_POST['password'] ?? '';
         $confirmPassword = $_POST['confirm_password'] ?? '';
-    if ($newPassword !== $confirmPassword) {
+        if ($newPassword !== $confirmPassword) {
             $error = "New passwords do not match.";
-        } else {
+        } 
+        elseif (strlen($newPassword)<8){
+            $error = "password length should be more than 7 charecters";
+        }else {
             if ($userRepo->changePassword($userId, $newPassword)) {
                 $success = "Password updated successfully!";
             } else {
                 $error = "Current password is incorrect.";
             }
         }
-    }
+    } elseif (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        try {
+
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $file = $_FILES['image'];
+                $fileName = basename($file['name']);
+                $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                $allowedExtensions = ['jpg', 'jpeg', 'png'];
+                $maxFileSize = 5 * 1024 * 1024;
+
+                if (!in_array($fileExt, $allowedExtensions)) {
+                    $error = "Only JPG, JPEG, PNG files are allowed.";
+                } elseif ($file['size'] > $maxFileSize) {
+                    $error = "File size must be less than 5MB.";
+                } else {
+                    $newFileName = uniqid('', true) . '.' . $fileExt;
+                    $uploadDir = 'uploads/';
+
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0755, true);
+                    }
+
+                    if (move_uploaded_file($file['tmp_name'], "{$uploadDir}{$newFileName}")) {
+                        $oldImage = $userRepo->getUserImage($userId);
+                        if ($oldImage && $oldImage !== 'default.png' && file_exists("{$uploadDir}{$oldImage}")) {
+                            unlink("{$uploadDir}{$oldImage}");
+                        }
+
+                        $userRepo->updateImage($userId, $newFileName);
+                    } else {
+                        $error = "Failed to upload image.";
+                    }
+                }
+            }
+
+            $success = "Profile updated successfully!";
+        } catch (Exception $e) {
+            $error = "An error occurred: " . $e->getMessage();
+        }
+    } elseif (isset($_POST['name']) || isset($_POST['age']) || isset($_POST['email']) || isset($_POST['bio']) || isset($_POST['location'])) {
+        $name = $_POST['name'] ;
+        $age = $_POST['age'] ;
+        $email = $_POST['email'];
+        $bio = $_POST['bio'];
+        $location = $_POST['location'];
 
 
-    else {
-        $name = trim($_POST['name'] ?? '');
-        $age = trim($_POST['age'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $bio = trim($_POST['bio'] ?? '');
-        $location = trim($_POST['location'] ?? '');
+        $stmt = $db->connection->prepare("SELECT * FROM users WHERE email = :email and id != :id");
+        $stmt->execute(['email' => $email, 'id' => $userId]);
 
         if (!$name || !$age || !$email) {
             $error = "Name, age, and email are required fields.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Invalid email format";
+        } elseif ($stmt->fetch()) {
+            $error = "Email already registered by another user";
         } else {
-            try {
-                // Update basic user info
-                $userRepo->updateUser($userId, $name, $age, $email, null, $bio, $location);
-
-                // Handle image upload if provided
-                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                    $file = $_FILES['image'];
-                    $fileName = basename($file['name']);
-                    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-                    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-                    $maxFileSize = 5 * 1024 * 1024; // 5MB
-
-                    if (!in_array($fileExt, $allowedExtensions)) {
-                        $error = "Only JPG, JPEG, PNG & GIF files are allowed.";
-                    } elseif ($file['size'] > $maxFileSize) {
-                        $error = "File size must be less than 5MB.";
-                    } else {
-                        $newFileName = uniqid('', true) . '.' . $fileExt;
-                        $uploadDir = 'uploads/';
-
-                        // Create uploads directory if it doesn't exist
-                        if (!is_dir($uploadDir)) {
-                            mkdir($uploadDir, 0755, true);
-                        }
-
-                        if (move_uploaded_file($file['tmp_name'], "{$uploadDir}{$newFileName}")) {
-                            // Delete old image if it exists and isn't the default
-                            $oldImage = $userRepo->getUserImage($userId);
-                            if ($oldImage && $oldImage !== 'default.png' && file_exists("{$uploadDir}{$oldImage}")) {
-                                unlink("{$uploadDir}{$oldImage}");
-                            }
-
-                            $userRepo->updateImage($userId, $newFileName);
-                        } else {
-                            $error = "Failed to upload image.";
-                        }
-                    }
-                }
-
-                $success = "Profile updated successfully!";
-            } catch (Exception $e) {
-                $error = "An error occurred: " . $e->getMessage();
-            }
+            $userRepo->updateUser(userId: $userId, name: $name, age: $age, email: $email, bio: $bio, location: $location);
+            $success = "Profile updated successfully!";
         }
     }
 
-    // Refresh user data
     $user = $userRepo->getUserById($userId);
 
     // Store messages in session for redirect

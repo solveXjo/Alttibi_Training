@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,17 +25,17 @@ if (!isset($_SESSION['user_id'])) {
             --text-light: #7f8c8d;
             --border-color: #e0e0e0;
         }
-        
+
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .navbar {
             background-color: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .create-post-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -42,7 +43,7 @@ if (!isset($_SESSION['user_id'])) {
             margin-bottom: 20px;
             padding: 20px;
         }
-        
+
         .post-input {
             border: none;
             border-radius: 8px;
@@ -54,13 +55,13 @@ if (!isset($_SESSION['user_id'])) {
             font-size: 1rem;
             transition: all 0.3s;
         }
-        
+
         .post-input:focus {
             outline: none;
             box-shadow: 0 0 0 2px var(--primary-color);
             background: white;
         }
-        
+
         .post-button {
             background-color: var(--primary-color);
             border: none;
@@ -70,12 +71,12 @@ if (!isset($_SESSION['user_id'])) {
             color: white;
             transition: all 0.3s;
         }
-        
+
         .post-button:hover {
             background-color: var(--hover);
             transform: translateY(-2px);
         }
-        
+
         .post-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -83,14 +84,14 @@ if (!isset($_SESSION['user_id'])) {
             margin-bottom: 20px;
             overflow: hidden;
         }
-        
+
         .post-header {
             display: flex;
             align-items: center;
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         .post-user-img {
             width: 40px;
             height: 40px;
@@ -98,31 +99,31 @@ if (!isset($_SESSION['user_id'])) {
             object-fit: cover;
             margin-right: 12px;
         }
-        
+
         .post-user-name {
             font-weight: 600;
             margin-bottom: 0;
             color: var(--text-dark);
         }
-        
+
         .post-time {
             font-size: 0.8rem;
             color: var(--text-light);
         }
-        
+
         .post-content {
             padding: 15px;
             color: var(--text-dark);
             line-height: 1.5;
         }
-        
+
         .post-actions {
             padding: 10px 15px;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-around;
         }
-        
+
         .action-btn {
             color: var(--text-light);
             background: none;
@@ -130,21 +131,21 @@ if (!isset($_SESSION['user_id'])) {
             font-size: 0.9rem;
             transition: all 0.2s;
         }
-        
+
         .action-btn:hover {
             color: var(--primary-color);
             transform: scale(1.1);
         }
-        
+
         .action-btn i {
             margin-right: 5px;
         }
-        
+
         .sidebar {
             position: sticky;
             top: 20px;
         }
-        
+
         .sidebar-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -152,7 +153,7 @@ if (!isset($_SESSION['user_id'])) {
             padding: 20px;
             margin-bottom: 20px;
         }
-        
+
         .trending-tag {
             display: inline-block;
             background: #f8f9fa;
@@ -164,13 +165,13 @@ if (!isset($_SESSION['user_id'])) {
             color: var(--text-dark);
             transition: all 0.2s;
         }
-        
+
         .trending-tag:hover {
             background: var(--primary-color);
             color: white;
             text-decoration: none;
         }
-        
+
         @media (max-width: 768px) {
             .sidebar {
                 display: none;
@@ -178,6 +179,7 @@ if (!isset($_SESSION['user_id'])) {
         }
     </style>
 </head>
+
 <body>
     <?php require_once 'Partials/nav.php'; ?>
 
@@ -194,71 +196,45 @@ if (!isset($_SESSION['user_id'])) {
                             <!-- <h5 class="mb-0">What's on your mind, <?= htmlspecialchars($_SESSION['name']) ?>?</h5> -->
                         </div>
                         <textarea class="post-input mb-3" name="caption" id="caption" placeholder="Share your thoughts..." required></textarea>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-secondary me-2">
-                                    <i class="fas fa-image"></i> Photo
-                                </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    <i class="fas fa-video"></i> Video
-                                </button>
-                            </div>
+                        <div class="d-flex justify-content-center align-items-center">
+       
                             <button type="submit" class="post-button">Post</button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Sample Post (would be dynamic in real app) -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="post-user-img" alt="User">
-                        <div>
-                            <h6 class="post-user-name">John Doe</h6>
-                            <small class="post-time">2 hours ago</small>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>Just finished my morning hike! The view was absolutely breathtaking. Nature always helps me clear my mind and find new inspiration.</p>
-                        <img src="https://images.unsplash.com/photo-1682686580391-615bd4062efb" class="img-fluid rounded mb-2" alt="Post image">
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i> Like
-                        </button>
-                        <button class="action-btn">
-                            <i class="far fa-comment"></i> Comment
-                        </button>
-                        <button class="action-btn">
-                            <i class="fas fa-share"></i> Share
-                        </button>
+
+                <?php if (!empty($mostLikedPosts)): ?>
+    <div class="mb-4">
+        <h5 class="text-center mb-3" style="color: #4E5180; font-weight: 600;">
+            <i class="fas fa-fire"></i> Most Popular Posts
+        </h5>
+        <?php foreach ($mostLikedPosts as $post): ?>
+            <div class="post-card mb-3" style="border-left: 4px solid #4E5180;">
+                <div class="post-header">
+                    <img src="uploads/<?= !empty($post['user_image']) ? htmlspecialchars($post['user_image']) : 'default.png' ?>" 
+                         class="post-user-img" alt="User">
+                    <div>
+                        <h6 class="post-user-name"><?= htmlspecialchars($post['name']) ?></h6>
+                        <small class="post-time">
+                            <?= date('F j, Y \a\t g:i a', strtotime($post['created_at'])) ?>
+                            • <span style="color: #4E5180;"><i class="fas fa-heart"></i> <?= $post['likes'] ?> likes</span>
+                        </small>
                     </div>
                 </div>
-
-                <!-- Another Sample Post -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="post-user-img" alt="User">
-                        <div>
-                            <h6 class="post-user-name">Jane Smith</h6>
-                            <small class="post-time">5 hours ago</small>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>Working on a new project that I'm really excited about! Can't wait to share more details soon. #coding #webdevelopment</p>
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">
-                            <i class="far fa-thumbs-up"></i> Like
-                        </button>
-                        <button class="action-btn">
-                            <i class="far fa-comment"></i> Comment
-                        </button>
-                        <button class="action-btn">
-                            <i class="fas fa-share"></i> Share
-                        </button>
-                    </div>
+                <div class="post-content">
+                    <p><?= htmlspecialchars($post['caption']) ?></p>
+                    <?php if (!empty($post['image'])): ?>
+                        <img src="uploads/<?= htmlspecialchars($post['image']) ?>" class="img-fluid rounded mb-2" alt="Post image">
+                    <?php endif; ?>
                 </div>
             </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+
+</div>
 
             <!-- Sidebar Column -->
             <div class="col-lg-4 sidebar">
