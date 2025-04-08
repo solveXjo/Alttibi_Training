@@ -34,10 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $confirmPassword = $_POST['confirm_password'] ?? '';
         if ($newPassword !== $confirmPassword) {
             $error = "New passwords do not match.";
-        } 
-        elseif (strlen($newPassword)<8){
+        } elseif (strlen($newPassword) < 8) {
             $error = "password length should be more than 7 charecters";
-        }else {
+        } else {
             if ($userRepo->changePassword($userId, $newPassword)) {
                 $success = "Password updated successfully!";
             } else {
@@ -84,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "An error occurred: " . $e->getMessage();
         }
     } elseif (isset($_POST['name']) || isset($_POST['age']) || isset($_POST['email']) || isset($_POST['bio']) || isset($_POST['location'])) {
-        $name = $_POST['name'] ;
-        $age = $_POST['age'] ;
+        $name = $_POST['name'];
+        $age = $_POST['age'];
         $email = $_POST['email'];
         $bio = $_POST['bio'];
         $location = $_POST['location'];
@@ -100,6 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Invalid email format";
         } elseif ($stmt->fetch()) {
             $error = "Email already registered by another user";
+        } elseif ($age > 80 || $age < 18) {
+            $error = "the age must be between 18 and 80";
         } else {
             $userRepo->updateUser(userId: $userId, name: $name, age: $age, email: $email, bio: $bio, location: $location);
             $success = "Profile updated successfully!";

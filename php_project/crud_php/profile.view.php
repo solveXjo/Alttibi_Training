@@ -5,7 +5,6 @@
     <?php include 'partials/head.php'; ?>
     <title><?= htmlspecialchars($user['name'] ?? 'User') ?> | Profile</title>
     <style>
-
         body {
             background-color: var(--bg-color);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -22,7 +21,6 @@
 
         .cover-photo {
             height: 200px;
-            background-color: #e9ebee;
             position: relative;
         }
 
@@ -192,7 +190,8 @@
         <!-- Profile Header -->
         <div class="profile-header">
             <div class="cover-photo"></div>
-            <div class="profile-info">
+            
+                <div class="profile-info">
                 <form method="post" enctype="multipart/form-data" class="image-upload-form">
                     <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>"
                         alt="Profile Image"
@@ -256,7 +255,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="location" class="form-label">Location</label>
                         <label for="country">Country</label>
 
                         <select id="location" name="location" class="form-control">
@@ -516,7 +514,7 @@
                 <div class="profile-card" style="margin-bottom: 20px;">
                     <h3>Change Password</h3>
                     <form method="post" action="">
- 
+
                         <div class="form-group">
                             <label for="password" class="form-label">New Password</label>
                             <input type="password" class="form-control" id="password" name="password">

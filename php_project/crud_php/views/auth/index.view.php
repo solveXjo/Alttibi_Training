@@ -134,7 +134,6 @@ require_once 'controllers/index.php';
             <div class="col-lg-10">
                 <div class="signup-card">
                     <div class="row no-gutters">
-                        <!-- Form Section -->
                         <div class="col-lg-7 form-section">
                             <div class="form-header">
                                 <img src="images/download.png" alt="Sign up icon">
@@ -201,8 +200,6 @@ require_once 'controllers/index.php';
         </div>
     </div>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
