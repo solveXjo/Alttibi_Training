@@ -42,10 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Get all posts
 $posts = $postRepo->getAllPosts();
 
-// Get most liked posts (top 2)
 $mostLikedPosts = $postRepo->getMostLikedPosts(2);
 
 require 'Home.view.php';

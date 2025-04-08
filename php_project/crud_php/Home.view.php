@@ -185,16 +185,10 @@ if (!isset($_SESSION['user_id'])) {
 
     <div class="container py-4">
         <div class="row">
-            <!-- Main Content Column -->
             <div class="col-lg-8">
-                <!-- Create Post Card -->
                 <div class="create-post-card">
                     <form action="" method="post">
-                        <div class="d-flex align-items-center mb-3">
-                            <!-- <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['name']) ?>&background=5F99AE&color=fff"  -->
-                                 <!-- class="post-user-img" alt="Profile"> -->
-                            <!-- <h5 class="mb-0">What's on your mind, <?= htmlspecialchars($_SESSION['name']) ?>?</h5> -->
-                        </div>
+
                         <textarea class="post-input mb-3" name="caption" id="caption" placeholder="Share your thoughts..." required></textarea>
                         <div class="d-flex justify-content-center align-items-center">
        
@@ -205,9 +199,9 @@ if (!isset($_SESSION['user_id'])) {
 
 
                 <?php if (!empty($mostLikedPosts)): ?>
-    <div class="mb-4">
+    <div class="mb-4 mt-4">
         <h5 class="text-center mb-3" style="color: #4E5180; font-weight: 600;">
-            <i class="fas fa-fire"></i> Most Popular Posts
+            <i class="fas fa-fire"></i> Most Liked Posts
         </h5>
         <?php foreach ($mostLikedPosts as $post): ?>
             <div class="post-card mb-3" style="border-left: 4px solid #4E5180;">
@@ -256,7 +250,7 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="d-flex align-items-center mb-3">
                             <img src="https://randomuser.me/api/portraits/men/22.jpg" class="post-user-img" alt="User">
                             <div>
-                                <h6 class="post-user-name mb-0">Mike Johnson</h6>
+                                <h6 class="post-user-name">Mike Johnson</h6>
                                 <small class="post-time">12 mutual friends</small>
                             </div>
                             <button class="btn btn-sm btn-outline-primary ms-auto">Add</button>
@@ -264,7 +258,7 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="d-flex align-items-center mb-3">
                             <img src="https://randomuser.me/api/portraits/women/33.jpg" class="post-user-img" alt="User">
                             <div>
-                                <h6 class="post-user-name mb-0">Sarah Williams</h6>
+                                <h6 class="post-user-name ">Sarah Williams</h6>
                                 <small class="post-time">8 mutual friends</small>
                             </div>
                             <button class="btn btn-sm btn-outline-primary ms-auto">Add</button>
@@ -272,7 +266,7 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="d-flex align-items-center">
                             <img src="https://randomuser.me/api/portraits/men/45.jpg" class="post-user-img" alt="User">
                             <div>
-                                <h6 class="post-user-name mb-0">David Brown</h6>
+                                <h6 class="post-user-name ">David Brown</h6>
                                 <small class="post-time">5 mutual friends</small>
                             </div>
                             <button class="btn btn-sm btn-outline-primary ms-auto">Add</button>

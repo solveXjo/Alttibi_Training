@@ -216,20 +216,6 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <div class="stat-number"><?= $postCount ?? 0 ?></div>
-                        <div class="stat-label">Posts</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number"><?= $followerCount ?? 0 ?></div>
-                        <div class="stat-label">Followers</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number"><?= $followingCount ?? 0 ?></div>
-                        <div class="stat-label">Following</div>
-                    </div>
-                </div>
             </div>
         </div>
 
