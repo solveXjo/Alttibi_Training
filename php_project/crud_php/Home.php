@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-$posts = $postRepo->getAllPosts();
 
 $mostLikedPosts = $postRepo->getMostLikedPosts(2);
 
