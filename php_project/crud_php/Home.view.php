@@ -15,168 +15,25 @@ if (!isset($_SESSION['user_id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #5F99AE;
-            --secondary-color: #F5ECE0;
-            --hover: #336D82;
-            --hover-text: #FFF;
-            --card-bg: #FFFFFF;
-            --text-dark: #2c3e50;
-            --text-light: #7f8c8d;
-            --border-color: #e0e0e0;
-        }
 
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
 
-        .create-post-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-            padding: 20px;
-        }
 
-        .post-input {
-            border: none;
-            border-radius: 8px;
-            background: #f8f9fa;
-            padding: 15px;
-            width: 100%;
-            resize: none;
-            min-height: 100px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
 
-        .post-input:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px var(--primary-color);
-            background: white;
-        }
 
-        .post-button {
-            background-color: var(--primary-color);
-            border: none;
-            border-radius: 8px;
-            padding: 10px 25px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s;
-        }
 
-        .post-button:hover {
-            background-color: var(--hover);
-            transform: translateY(-2px);
-        }
+  
 
-        .post-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
 
-        .post-header {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
 
-        .post-user-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 12px;
-        }
 
-        .post-user-name {
-            font-weight: 600;
-            margin-bottom: 0;
-            color: var(--text-dark);
-        }
 
-        .post-time {
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
 
-        .post-content {
-            padding: 15px;
-            color: var(--text-dark);
-            line-height: 1.5;
-        }
 
-        .post-actions {
-            padding: 10px 15px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-around;
-        }
 
-        .action-btn {
-            color: var(--text-light);
-            background: none;
-            border: none;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-        }
 
-        .action-btn:hover {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
 
-        .action-btn i {
-            margin-right: 5px;
-        }
 
-        .sidebar {
-            position: sticky;
-            top: 20px;
-        }
-
-        .sidebar-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .trending-tag {
-            display: inline-block;
-            background: #f8f9fa;
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            transition: all 0.2s;
-        }
-
-        .trending-tag:hover {
-            background: var(--primary-color);
-            color: white;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-        }
     </style>
 </head>
 
