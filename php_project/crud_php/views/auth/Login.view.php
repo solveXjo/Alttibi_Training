@@ -14,9 +14,8 @@ require_once 'controllers/Login.php';
 </head>
 
 <body>
-  <section class="h-100 gradient-form" style="background-color: var(--secondary-color);">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center">
         <div class="col-xl-10">
           <div class="card rounded-3 text-black">
             <div class="row g-0">
@@ -67,7 +66,6 @@ require_once 'controllers/Login.php';
         </div>
       </div>
     </div>
-  </section>
 </body>
 
 </html>
