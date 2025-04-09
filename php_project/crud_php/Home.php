@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id']; 
     $name = ($_POST['name']);
 
-    if($caption === ''){
-        header("Location: Home.php");
+    if(trim($caption) === ''){
+        header("Location: /home");
         exit();
     }
 
