@@ -1,9 +1,11 @@
 <?php
 // require_once 'config.php';
-class Database {
+class Database
+{
     public $connection;
 
-    public function __construct($config) {
+    public function __construct($config)
+    {
         $dbConfig = $config['database'];
         // var_dump($config);
         // die();
@@ -20,7 +22,8 @@ class Database {
         }
     }
 
-    public function query($sql, $params = []) {
+    public function query($sql, $params = [])
+    {
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($params);
         return $stmt;

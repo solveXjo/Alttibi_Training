@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $caption = ($_POST['caption']);
-    $user_id = $_SESSION['user_id']; 
+    $user_id = $_SESSION['user_id'];
     $name = ($_POST['name']);
 
-    if(trim($caption) === ''){
+    if (trim($caption) === '') {
         header("Location: /home");
         exit();
     }
