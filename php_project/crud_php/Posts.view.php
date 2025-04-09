@@ -13,7 +13,6 @@ session_start();
     <?php require 'Partials/nav.php'; ?>
 
     <div class="container">
-        <!-- Create Post Card (would link to your post creation page) -->
 
 
         <?php if (count($posts) > 0) : ?>
@@ -21,38 +20,36 @@ session_start();
 
 
                 <div class="post-card">
-    <!-- Post Header -->
-    <div class="post-header">
-        <img src="uploads/<?= !empty($post['user_image']) ? htmlspecialchars($post['user_image']) : 'default.png' ?>" 
-             alt="Profile" 
-             class="post-avatar">
-        
-        <div>
-            <div class="post-user"><?= htmlspecialchars($post['name']) ?></div>
-            <div class="post-time"><?= date('F j, Y \a\t g:i a', strtotime($post['created_at'])) ?></div>
-        </div>
-        
-        <?php if ($post['user_id'] == $_SESSION['user_id']) : ?>
-            <div style="margin-left: auto;">
-                <form method="post" action="/posts" style="display:inline;">
-                    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                    <button type="submit" name="delete_post" class="btn btn-sm" 
-                        style="color: var(--text-secondary);" 
-                        onclick="return confirm('Are you sure you want to delete this post?');">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </button>
-                </form>
-            </div>
-        <?php endif; ?>
-    </div>
+                    <div class="post-header">
+                        <img src="uploads/<?= !empty($post['user_image']) ? htmlspecialchars($post['user_image']) : 'default.png' ?>"
+                            alt="Profile"
+                            class="post-avatar">
 
-    <!-- Post Content -->
-    <div class="post-content">
-        <p><?= htmlspecialchars($post['caption']) ?></p>
-        <?php if (!empty($post['image'])) : ?>
-            <img src="uploads/<?= htmlspecialchars($post['image']) ?>" class="post-image">
-        <?php endif; ?>
-    </div>
+                        <div>
+                            <div class="post-user"><?= htmlspecialchars($post['name']) ?></div>
+                            <div class="post-time"><?= date('F j, Y \a\t g:i a', strtotime($post['created_at'])) ?></div>
+                        </div>
+
+                        <?php if ($post['user_id'] == $_SESSION['user_id']) : ?>
+                            <div style="margin-left: auto;">
+                                <form method="post" action="/posts" style="display:inline;">
+                                    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                                    <button type="submit" name="delete_post" class="btn btn-sm"
+                                        style="color: var(--text-secondary);"
+                                        onclick="return confirm('Are you sure you want to delete this post?');">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="post-content">
+                        <p><?= htmlspecialchars($post['caption']) ?></p>
+                        <?php if (!empty($post['image'])) : ?>
+                            <img src="uploads/<?= htmlspecialchars($post['image']) ?>" class="post-image">
+                        <?php endif; ?>
+                    </div>
 
                     <div style="color: var(--text-secondary); font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
                         <span><i class="fa fa-thumbs-up"></i> <?= $post['likes'] ?> Likes</span>
@@ -74,7 +71,6 @@ session_start();
 
                     </div>
 
-                    <!-- Comments Section -->
                     <div class="comments-section">
                         <?php if (!empty($post['comments'])) : ?>
                             <?php foreach ($post['comments'] as $comment) : ?>
@@ -88,7 +84,6 @@ session_start();
                             <?php endforeach; ?>
                         <?php endif; ?>
 
-                        <!-- Comment Form -->
                         <form method="post" action="../../comment.php" class="comment-form">
                             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                             <img src="uploads/default.png" alt="Profile" class="comment-avatar">
