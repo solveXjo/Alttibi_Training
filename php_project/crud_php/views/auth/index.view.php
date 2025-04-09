@@ -67,7 +67,7 @@ require_once 'controllers/index.php';
 
                         <div class="col-lg-5 graphic-section">
                             <div>
-                                <h3>Join Our Community</h3>
+                                <h3 class="text-light">Join Our Community</h3>
                                 <p class="mt-4">Create an account to unlock all features and connect with like-minded people. We're excited to have you on board!</p>
                                 <ul class="mt-4" style="list-style-type: none; padding-left: 0;">
                                     <li class="mb-3"><i class="fas fa-check-circle me-2"></i> Personalized dashboard</li>

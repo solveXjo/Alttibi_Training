@@ -10,63 +10,7 @@ require_once 'controllers/Login.php';
     $include = include 'Partials/head.php'; 
     ?>
     <title>Login</title>
-    <style>
-        :root {
-            --primary-color: #5F99AE;
-            --secondary-color: #F5ECE0;
-            --hover: #336D82;
-            --hover-text: #FFF;
-        }
-        
-        .gradient-custom-2 {
-            background: var(--primary-color);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-primary:hover, 
-        .btn-primary:focus {
-            background-color: var(--hover);
-            border-color: var(--hover);
-            color: var(--hover-text);
-        }
-        
-        .btn-outline-danger {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-outline-danger:hover {
-            background-color: var(--primary-color);
-            color: var(--hover-text);
-        }
-        
-        .gradient-form {
-            background-color: var(--secondary-color);
-        }
-        
-        @media (min-width: 768px) {
-            .gradient-form {
-                height: 100vh !important;
-            }
-        }
-        
-        @media (min-width: 769px) {
-            .gradient-custom-2 {
-                border-top-right-radius: .3rem;
-                border-bottom-right-radius: .3rem;
-            }
-        }
-        
-        .error {
-            color: #d8363a;
-            display: block;
-            margin-bottom: 15px;
-        }
-    </style>
+
 </head>
 
 <body>
