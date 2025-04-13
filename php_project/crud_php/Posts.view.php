@@ -8,31 +8,35 @@ session_start();
     <?php include 'Partials/head.php'; ?>
     <title>Feed | SocialApp</title>
     <script>
-        function likePost(postId) {
-            fetch('like_post.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'post_id=' + postId
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('like-count-' + postId).textContent = data.likes + ' Likes';
+    $(document).ready(function() {
+        $('.like-btn').click(function() {
+            var $button = $(this);
+            var postId = $button.data('post-id');
+            var $icon = $button.find('i');
+            var isLiked = $icon.hasClass('liked');
+            var $likeCount = $button.closest('.post-actions').prev().find('.like-count');
+            var currentLikes = parseInt($likeCount.text());
 
-                        const likeIcon = document.getElementById('like-icon-' + postId);
-                        if (data.liked) {
-                            likeIcon.classList.add('liked');
-                        } else {
-                            likeIcon.classList.remove('liked');
-                        }
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
+            $likeCount.text(isLiked ? currentLikes - 1 : currentLikes + 1);
+            $icon.toggleClass('liked');
+            $button.prop('disabled', true);
+
+            $.post('handle_like.php', {
+                post_id: postId,
+                action: isLiked ? 'unlike' : 'like'
+            }, function(response) {
+                $likeCount.text(response);
+            }).fail(function() {
+                $likeCount.text(currentLikes);
+                $icon.toggleClass('liked');
+            }).always(function() {
+                $button.prop('disabled', false);
+            });
+        });
+    });
     </script>
 </head>
+
 
 <body>
     <?php require 'Partials/nav.php'; ?>
@@ -77,22 +81,19 @@ session_start();
                     </div>
 
                     <div style="color: var(--text-secondary); font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-                        <span id="like-count-<?= $post['id'] ?>">
-                            <i class="fa fa-thumbs-up"></i> <?= $post['likes'] ?> Likes
-                        </span>
+                        <span><i class="fa fa-thumbs-up"></i> <span class="like-count"><?= $post['likes'] ?></span> Likes</span>
                         <span style="margin-left: 15px;"><?= count($post['comments'] ?? []) ?> comments</span>
                     </div>
 
                     <div class="post-actions">
-                        <button onclick="likePost(<?= $post['id'] ?>)" class="action-btn">
-                            <i id="like-icon-<?= $post['id'] ?>" class="fa fa-thumbs-up <?= $post['liked'] ? 'liked' : '' ?>"></i> Like
+                        <button type="button" class="action-btn like-btn" data-post-id="<?= $post['id'] ?>">
+                            <i class="fa fa-thumbs-up <?= $post['liked'] ? 'liked' : '' ?>"></i> Like
                         </button>
                         <div class="action-btn">
                             <a href="comment.php?post_id=<?= $post['id'] ?>" style="color:blue; text-decoration: none;">
                                 <i class="fa fa-comment"></i> Comment
                             </a>
                         </div>
-
                     </div>
 
                     <div class="comments-section">
@@ -130,3 +131,4 @@ session_start();
 </body>
 
 </html>
+

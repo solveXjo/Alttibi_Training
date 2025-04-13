@@ -765,3 +765,14 @@ button i:hover {
   flex-direction: column;
   justify-content: center;
 }
+
+
+@media (max-width: 700px){
+  .graphic-section{
+    display:none;
+  }
+}
+
+.like-btn:hover{
+  background-color: var(--hover);
+}

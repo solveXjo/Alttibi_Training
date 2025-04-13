@@ -10,11 +10,6 @@ require 'models/UserRepository.php';
 
 $userRepo = new UserRepository(($db));
 
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: index.php");
-//     exit();
-// }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     $postId = $_POST['post_id'];
