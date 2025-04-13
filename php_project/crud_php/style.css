@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #5f99ae;
+  --primary-color: #0160f8;
   --secondary-color: #f5ece0;
-  --hover: #336d82;
+  --hover: #0160f8;
 
   --hover-text: #fff;
 
@@ -347,9 +347,6 @@ form button {
   border-radius: 5px;
 }
 
-.btn.btn-primary {
-  padding: 10px 25px;
-}
 
 .btn.btn-sm.btn-success {
   margin: 0;

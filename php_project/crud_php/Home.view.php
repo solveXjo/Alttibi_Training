@@ -37,7 +37,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php if (!empty($mostLikedPosts)): ?>
                     <div class="mb-4 mt-4">
                         <h5 class="text-center mb-3" style="color: #4E5180; font-weight: 600;">
-                            <i class="fas fa-fire"></i> Most Liked Posts
+                            <i class="fas fa-fire" style="color: red;"></i> Most Liked Posts
                         </h5>
                         <?php foreach ($mostLikedPosts as $post): ?>
                             <div class="post-card mb-3" style="border-left: 4px solid #4E5180;">
@@ -66,7 +66,6 @@ if (!isset($_SESSION['user_id'])) {
 
             </div>
 
-            <!-- Sidebar Column -->
             <div class="col-lg-4 sidebar">
                 <div class="sidebar-card">
                     <h5>Trending Today</h5>

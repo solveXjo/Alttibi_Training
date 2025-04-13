@@ -7,6 +7,31 @@ session_start();
 <head>
     <?php include 'Partials/head.php'; ?>
     <title>Feed | SocialApp</title>
+    <script>
+        function likePost(postId) {
+            fetch('like_post.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'post_id=' + postId
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('like-count-' + postId).textContent = data.likes + ' Likes';
+
+                        const likeIcon = document.getElementById('like-icon-' + postId);
+                        if (data.liked) {
+                            likeIcon.classList.add('liked');
+                        } else {
+                            likeIcon.classList.remove('liked');
+                        }
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 
 <body>
@@ -52,17 +77,16 @@ session_start();
                     </div>
 
                     <div style="color: var(--text-secondary); font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-                        <span><i class="fa fa-thumbs-up"></i> <?= $post['likes'] ?> Likes</span>
+                        <span id="like-count-<?= $post['id'] ?>">
+                            <i class="fa fa-thumbs-up"></i> <?= $post['likes'] ?> Likes
+                        </span>
                         <span style="margin-left: 15px;"><?= count($post['comments'] ?? []) ?> comments</span>
                     </div>
 
                     <div class="post-actions">
-                        <form method="post" action="" class="like-form" style="flex: 1;">
-                            <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                            <button type="submit" name="like" class="action-btn">
-                                <i class="fa fa-thumbs-up <?= $post['liked'] ? 'liked' : '' ?>"></i> Like
-                            </button>
-                        </form>
+                        <button onclick="likePost(<?= $post['id'] ?>)" class="action-btn">
+                            <i id="like-icon-<?= $post['id'] ?>" class="fa fa-thumbs-up <?= $post['liked'] ? 'liked' : '' ?>"></i> Like
+                        </button>
                         <div class="action-btn">
                             <a href="comment.php?post_id=<?= $post['id'] ?>" style="color:blue; text-decoration: none;">
                                 <i class="fa fa-comment"></i> Comment

@@ -1,13 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: /index");
     exit();
 }
 
 $userId = $_SESSION['user_id'];
 
-require_once 'config.php';
 require_once 'Database.php';
 require_once 'models/PostRepository.php';
 

@@ -7,7 +7,7 @@
 <body>
   
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 0;">
-  <div class="container-fluid" style="background: #336D82">
+  <div class="container-fluid" style="background: var(--primary-color);">
     <a class="navbar-brand" href="home" style="margin: 0;">
       <img src="images/Solvex Logo.png" alt="" style="margin: 0;">
     </a>
