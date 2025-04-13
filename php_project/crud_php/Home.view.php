@@ -9,11 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <?php include "Partials/head.php"; ?>
 </head>
 
 <body>
@@ -37,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php if (!empty($mostLikedPosts)): ?>
                     <div class="mb-4 mt-4">
                         <h5 class="text-center mb-3" style="color: #4E5180; font-weight: 600;">
-                            <i class="fas fa-fire" style="color: red;"></i> Most Liked Posts
+                            <i class="fa fa-fire" style="color: red;"></i> Most Liked Posts
                         </h5>
                         <?php foreach ($mostLikedPosts as $post): ?>
                             <div class="post-card mb-3" style="border-left: 4px solid #4E5180;">
@@ -48,7 +44,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <h6 class="post-user-name"><?= htmlspecialchars($post['name']) ?></h6>
                                         <small class="post-time">
                                             <?= date('F j, Y \a\t g:i a', strtotime($post['created_at'])) ?>
-                                            • <span style="color: #4E5180;"><i class="fas fa-heart"></i> <?= $post['likes'] ?> likes</span>
+                                            • <span style="color: #4E5180;"><i class="fa fa-heart"></i> <?= $post['likes'] ?> likes</span>
                                         </small>
                                     </div>
                                 </div>
@@ -79,35 +75,6 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                 </div>
 
-                <div class="sidebar-card">
-                    <h5>Suggested Friends</h5>
-                    <div class="mt-3">
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="https://randomuser.me/api/portraits/men/22.jpg" class="post-user-img" alt="User">
-                            <div>
-                                <h6 class="post-user-name">Mike Johnson</h6>
-                                <small class="post-time">12 mutual friends</small>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary ms-auto">Add</button>
-                        </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="https://randomuser.me/api/portraits/women/33.jpg" class="post-user-img" alt="User">
-                            <div>
-                                <h6 class="post-user-name ">Sarah Williams</h6>
-                                <small class="post-time">8 mutual friends</small>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary ms-auto">Add</button>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="post-user-img" alt="User">
-                            <div>
-                                <h6 class="post-user-name ">David Brown</h6>
-                                <small class="post-time">5 mutual friends</small>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary ms-auto">Add</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

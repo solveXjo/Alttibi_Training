@@ -26,5 +26,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'])) {
         echo $likes; 
     
 } else {
-    echo "0"; 
+    echo 0; 
 }

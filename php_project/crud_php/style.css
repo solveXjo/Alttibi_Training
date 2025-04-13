@@ -240,6 +240,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
+
 }
 
 .action-btn:hover {
@@ -771,7 +772,20 @@ button i:hover {
   .graphic-section{
     display:none;
   }
+
+  .about-login{
+    display: none;
+  }
+
+  .list-group-item{
+    padding:5;
+    margin: 5px;
+    }
 }
+
+
+
+
 
 .like-btn:hover{
   background-color: var(--hover);

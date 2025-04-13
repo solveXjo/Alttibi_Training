@@ -6,18 +6,18 @@ session_start();
 
 <head>
     <?php include 'Partials/head.php'; ?>
-    <title>Feed | SocialApp</title>
+    <title>SocialApp</title>
     <script>
     $(document).ready(function() {
         $('.like-btn').click(function() {
             var $button = $(this);
             var postId = $button.data('post-id');
             var $icon = $button.find('i');
-            var isLiked = $icon.hasClass('liked');
+            var isLiked = $icon.hasClass('liked'); 
             var $likeCount = $button.closest('.post-actions').prev().find('.like-count');
             var currentLikes = parseInt($likeCount.text());
 
-            $likeCount.text(isLiked ? currentLikes - 1 : currentLikes + 1);
+            $likeCount.text(isLiked ? currentLikes - 1 : currentLikes + 1); 
             $icon.toggleClass('liked');
             $button.prop('disabled', true);
 
@@ -82,11 +82,10 @@ session_start();
 
                     <div style="color: var(--text-secondary); font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
                         <span><i class="fa fa-thumbs-up"></i> <span class="like-count"><?= $post['likes'] ?></span> Likes</span>
-                        <span style="margin-left: 15px;"><?= count($post['comments'] ?? []) ?> comments</span>
                     </div>
 
                     <div class="post-actions">
-                        <button type="button" class="action-btn like-btn" data-post-id="<?= $post['id'] ?>">
+                        <button type="button" class="action-btn like-btn" data-post-id="<?= $post['id'] ?>" style="background-color: #0160f8;">
                             <i class="fa fa-thumbs-up <?= $post['liked'] ? 'liked' : '' ?>"></i> Like
                         </button>
                         <div class="action-btn">
