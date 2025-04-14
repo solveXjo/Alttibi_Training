@@ -7,32 +7,32 @@ session_start();
 <title>Posts</title>
 
 <head>
-<?php include 'Partials/head.php'; ?>
+    <?php include 'Partials/head.php'; ?>
     <title>SocialApp</title>
     <script>
-    $(document).ready(function() {
-        $('.like-btn').click(function() {
-            var $button = $(this);
-            var postId = $button.data('post-id');
-            var $icon = $button.find('i');
-            var isLiked = $icon.hasClass('liked'); 
-            var $likeCount = $button.closest('.post-actions').prev().find('.like-count');
-            var currentLikes = parseInt($likeCount.text());
+        $(document).ready(function() {
+            $('.like-btn').click(function() {
+                var $button = $(this);
+                var postId = $button.data('post-id');
+                var $icon = $button.find('i');
+                var isLiked = $icon.hasClass('liked');
+                var $likeCount = $button.closest('.post-actions').prev().find('.like-count');
+                var currentLikes = parseInt($likeCount.text());
 
-            $likeCount.text(isLiked ? currentLikes - 1 : currentLikes + 1); 
-            $icon.toggleClass('liked');
-            $button.prop('disabled', true);
+                $likeCount.text(isLiked ? currentLikes - 1 : currentLikes + 1);
+                $icon.toggleClass('liked');
+                $button.prop('disabled', true);
 
-            $.post('handle_like.php', {
-                post_id: postId,
-                action: isLiked ? 'unlike' : 'like'
-            }, function(response) {
-                $likeCount.text(response);
-            }).always(function() {
-                $button.prop('disabled', false);
+                $.post('handle_like.php', {
+                    post_id: postId,
+                    action: isLiked ? 'unlike' : 'like'
+                }, function(response) {
+                    $likeCount.text(response);
+                }).always(function() {
+                    $button.prop('disabled', false);
+                });
             });
         });
-    });
     </script>
 </head>
 
@@ -75,7 +75,9 @@ session_start();
                     </div>
 
                     <div class="post-content">
-                        <strong><p><?= htmlspecialchars($post['caption']) ?></p></strong>
+                        <strong>
+                            <p><?= htmlspecialchars($post['caption']) ?></p>
+                        </strong>
                     </div>
 
                     <div style="color: var(--text-secondary); font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
@@ -122,8 +124,8 @@ session_start();
         <?php endif; ?>
     </div>
 
+    <? require 'Partials/footer.php'; ?>
 
 </body>
 
 </html>
-

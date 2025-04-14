@@ -23,6 +23,9 @@ else if($uri === "/profile"){
 else if($uri === "/Login"){
     require "views/auth/Login.view.php";
 }
+else if($uri === "/about"){
+    require "controllers/about.php";
+}
 else{
     require 'views/auth/index.view.php';
     exit();

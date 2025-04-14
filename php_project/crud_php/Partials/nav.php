@@ -36,7 +36,7 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="/home" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="category.html">Category</a></li>
           <li><a href="blog-details.html">Blog Details</a></li>
           <li><a href="author-profile.html">Author Profile</a></li>

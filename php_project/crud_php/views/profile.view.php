@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <?php include 'partials/head.php'; ?>
     <title><?= htmlspecialchars($user['name'] ?? 'User') ?> | Profile</title>
     <style>
-        body {
-            background-color: var(--bg-color);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text-color);
-        }
-
         .profile-header {
             background-color: var(--card-color);
             border-radius: 8px;
@@ -193,8 +184,8 @@
         <!-- Profile Header -->
         <div class="profile-header">
             <div class="cover-photo"></div>
-            
-                <div class="profile-info">
+
+            <div class="profile-info">
                 <form method="post" enctype="multipart/form-data" class="image-upload-form">
                     <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>"
                         alt="Profile Image"
@@ -545,6 +536,9 @@
             </div>
         </div>
     </div>
+
+    <? require 'Partials/footer.php'; ?>
+
 </body>
 
 </html>

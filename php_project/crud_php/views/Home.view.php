@@ -178,6 +178,8 @@ if (!isset($_SESSION['user_id'])) {
 
 
 
+    <? require 'Partials/footer.php'; ?> 
+
 </body>
 
 </html>
