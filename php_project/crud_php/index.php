@@ -11,14 +11,14 @@ if($uri === "/" || $uri === "/index" || $uri == ""){
 }
 
 else if($uri === "/posts"){
-    require "Posts.php";
+    require "controllers/Posts.php";
 }
 
 else if($uri === "/home"){
-    require "Home.php";
+    require "controllers/Home.php";
 }
 else if($uri === "/profile"){
-    require "profile.php";
+    require "controllers/profile.php";
 }
 else if($uri === "/Login"){
     require "views/auth/Login.view.php";

@@ -184,7 +184,10 @@
 </head>
 
 <body>
+
     <?php require 'partials/nav.php'; ?>
+    <?php include "Partials/pageTitle.php"; ?>
+
 
     <div class="container">
         <!-- Profile Header -->

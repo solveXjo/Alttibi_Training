@@ -13,13 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Error: You must be logged in to post.");
     }
 
+
+
     $caption = ($_POST['caption']);
+    $category = $_POST["category"];
     $user_id = $_SESSION['user_id'];
     $name = ($_POST['name']);
 
     if (trim($caption) === '') {
         header("Location: /home");
         exit();
+    }
+
+    if ($category === "" || $category === null){
+        $category = 'others';
     }
 
     $query = "SELECT name FROM users WHERE id = :user_id";
@@ -29,13 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = $user['name'];
 
-    $query = "INSERT INTO posts (user_id, name, caption, likes, created_at) VALUES (:user_id, :name, :caption, 0, NOW())";
+    $query = "INSERT INTO posts (user_id, name, caption, likes, created_at, category) VALUES (:user_id, :name, :caption, 0, NOW(), :category)";
     $stmt = $db->connection->prepare($query);
 
     $stmt->execute([
         'user_id' => $user_id,
         'name' => $name,
         'caption' => $caption,
+        'category' => $category,
     ]);
 
     header("Location: /posts");
@@ -43,6 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
+
+
+
+
 $mostLikedPosts = $postRepo->getMostLikedPosts(2);
 
-require 'Home.view.php';
+require 'views/Home.view.php';

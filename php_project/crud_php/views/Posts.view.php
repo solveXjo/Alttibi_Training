@@ -4,8 +4,10 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 
+<title>Posts</title>
+
 <head>
-    <?php include 'Partials/head.php'; ?>
+<?php include 'Partials/head.php'; ?>
     <title>SocialApp</title>
     <script>
     $(document).ready(function() {
@@ -26,9 +28,6 @@ session_start();
                 action: isLiked ? 'unlike' : 'like'
             }, function(response) {
                 $likeCount.text(response);
-            }).fail(function() {
-                $likeCount.text(currentLikes);
-                $icon.toggleClass('liked');
             }).always(function() {
                 $button.prop('disabled', false);
             });
@@ -40,6 +39,8 @@ session_start();
 
 <body>
     <?php require 'Partials/nav.php'; ?>
+    <?php include 'Partials/pageTitle.php'; ?>
+
 
     <div class="container">
 
@@ -50,7 +51,7 @@ session_start();
 
                 <div class="post-card">
                     <div class="post-header">
-                        <img src="uploads/<?= !empty($post['user_image']) ? htmlspecialchars($post['user_image']) : 'default.png' ?>"
+                        <img src="uploads/<?= !empty($post['user_image']) ? $post['user_image'] : 'default.png' ?>"
                             alt="Profile"
                             class="post-avatar">
 
@@ -74,10 +75,7 @@ session_start();
                     </div>
 
                     <div class="post-content">
-                        <p><?= htmlspecialchars($post['caption']) ?></p>
-                        <?php if (!empty($post['image'])) : ?>
-                            <img src="uploads/<?= htmlspecialchars($post['image']) ?>" class="post-image">
-                        <?php endif; ?>
+                        <strong><p><?= htmlspecialchars($post['caption']) ?></p></strong>
                     </div>
 
                     <div style="color: var(--text-secondary); font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
@@ -99,7 +97,6 @@ session_start();
                         <?php if (!empty($post['comments'])) : ?>
                             <?php foreach ($post['comments'] as $comment) : ?>
                                 <div class="comment">
-                                    <img src="uploads/default.png" alt="Profile" class="comment-avatar">
                                     <div class="comment-content">
                                         <div class="comment-user"><?= htmlspecialchars($comment['name']) ?></div>
                                         <div class="comment-text"><?= htmlspecialchars($comment['text']) ?></div>
@@ -110,7 +107,6 @@ session_start();
 
                         <form method="post" action="../../comment.php" class="comment-form">
                             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                            <img src="uploads/default.png" alt="Profile" class="comment-avatar">
                             <textarea name="comment" placeholder="Write a comment..."></textarea>
                             <button type="submit" name="submit" class="btn comment-btn">Post</button>
                         </form>

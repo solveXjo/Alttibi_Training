@@ -65,4 +65,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment'])) {
 
 $posts = $postRepo->getAllPosts();
 
-require 'Posts.view.php';
+require 'views/Posts.view.php';

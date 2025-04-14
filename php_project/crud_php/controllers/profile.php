@@ -89,6 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bio = $_POST['bio'];
         $location = $_POST['location'];
 
+        if ($location === "" || $location === null) {
+            $location = 'Palestine';
+        }
+
 
         $stmt = $db->connection->prepare("SELECT * FROM users WHERE email = :email and id != :id");
         $stmt->execute(['email' => $email, 'id' => $userId]);
