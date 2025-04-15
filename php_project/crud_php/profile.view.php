@@ -186,16 +186,7 @@
             <div class="cover-photo"></div>
 
             <div class="profile-info">
-                <form method="post" enctype="multipart/form-data" class="image-upload-form">
-                    <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>"
-                        alt="Profile Image"
-                        class="profile-picture">
-                    <label for="image" class="btn" style="margin-top: 70px;">
-                        Change Profile Picture <i class="fa-solid fa-user-pen"></i>
-                    </label>
-                    <input type="file" id="image" name="image" accept="image/*" style="display: none;"
-                        onchange="this.form.submit()">
-                </form>
+
 
                 <h1 class="profile-name"><?= htmlspecialchars($user['name'] ?? 'User') ?></h1>
 
@@ -230,6 +221,11 @@
                         <input type="text" class="form-control" id="name" name="name"
                             value="<?= htmlspecialchars($user['name'] ?? '') ?>" required>
                     </div>
+                    <div class="form-group">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title"
+                            value="<?= htmlspecialchars($user['title'] ?? '') ?>">
+                    </div>
 
                     <div class="form-group">
                         <label for="age" class="form-label">Age</label>
@@ -245,13 +241,17 @@
 
                     <div class="form-group">
                         <label for="bio" class="form-label">Bio</label>
-                        <textarea class="form-control" id="bio" name="bio" rows="3"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                        <input type="text" class="form-control" id="bio" name="bio"
+                            value="<?= htmlspecialchars($user['bio'] ?? '') ?>" required>
                     </div>
+
+
 
                     <div class="form-group">
                         <label for="country">Country</label>
 
                         <select id="location" name="location" class="form-control">
+                            <option value="" disabled selected>Select a country</option>
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Åland Islands">Åland Islands</option>
                             <option value="Albania">Albania</option>
@@ -537,7 +537,157 @@
         </div>
     </div>
 
-    <? require 'Partials/footer.php'; ?>
+
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title">
+            <div class="breadcrumbs">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="bi bi-house"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Category</a></li>
+                        <li class="breadcrumb-item active current">Author Profile</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="title-wrapper">
+                <h1>Author Profile</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+            </div>
+        </div><!-- End Page Title -->
+
+        <!-- Author Profile Section -->
+        <section id="author-profile" class="author-profile section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="author-profile-1">
+
+                    <div class="row">
+                        <!-- Author Info -->
+                        <div class="col-lg-4 mb-4 mb-lg-0">
+                            <div class="author-card" data-aos="fade-up">
+                                <div class="author-image">
+                                    <form method="post" enctype="multipart/form-data" class="image-upload-form">
+                                        <label for="image" class="btn" style="margin-top: 70px;">
+                                            <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>" />
+                                        </label>
+                                        <input type="file" id="image" name="image" accept="image/*" style="display: none;"
+                                            onchange="this.form.submit()">
+                                    </form>
+
+                                </div>
+
+
+
+
+
+                                <div class="author-info">
+                                    <h2><?= htmlspecialchars($user['name'] ?? 'User') ?></h2>
+                                    <p class="designation"><?= htmlspecialchars($user['title'] ?? 'User') ?></p>
+
+                                    <div class="author-bio">
+                                        <?= htmlspecialchars($user['bio'] ?? '') ?> </div>
+
+                                    <div class="author-stats d-flex justify-content-between text-center my-4">
+                                        <div class="stat-item">
+                                            <h4 data-purecounter-start="0" data-purecounter-end="147" data-purecounter-duration="1" class="purecounter">147</h4>
+                                            <p>Articles</p>
+                                        </div>
+                                        <div class="stat-item">
+                                            <h4 data-purecounter-start="0" data-purecounter-end="13" data-purecounter-duration="1" class="purecounter">13</h4>
+                                            <p>Awards</p>
+                                        </div>
+                                        <div class="stat-item">
+                                            <h4 data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter">25K</h4>
+                                            <p>Followers</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="social-links">
+                                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                        <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Author Content -->
+                        <div class="col-lg-8">
+                            <div class="author-content" data-aos="fade-up" data-aos-delay="200">
+                                <div class="content-header">
+                                    <h3>About Me</h3>
+                                </div>
+                                <div class="content-body">
+                                    <p> <?= htmlspecialchars($user['bio'] ?? '') ?></p>
+
+                                    <div class="expertise-areas">
+                                        <h4>Areas of Expertise</h4>
+                                        <div class="tags">
+                                            <span>Artificial Intelligence</span>
+                                            <span>Cybersecurity</span>
+                                            <span>Smart Home Technology</span>
+                                            <span>Digital Privacy</span>
+                                            <span>Consumer Electronics</span>
+                                            <span>Future Tech Trends</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="featured-articles mt-5">
+                                        <h4>Featured Articles</h4>
+                                        <div class="row g-4">
+                                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                                                <article class="article-card">
+                                                    <div class="article-img">
+                                                        <img src="assets/img/blog/blog-post-10.webp" alt="Article" class="img-fluid">
+                                                    </div>
+                                                    <div class="article-details">
+                                                        <div class="post-category">Technology</div>
+                                                        <h5><a href="#">The Future of AI in Everyday Computing</a></h5>
+                                                        <div class="post-meta">
+                                                            <span><i class="bi bi-clock"></i> Jan 15, 2024</span>
+                                                            <span><i class="bi bi-chat-dots"></i> 24 Comments</span>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                                                <article class="article-card">
+                                                    <div class="article-img">
+                                                        <img src="assets/img/blog/blog-post-6.webp" alt="Article" class="img-fluid">
+                                                    </div>
+                                                    <div class="article-details">
+                                                        <div class="post-category">Privacy</div>
+                                                        <h5><a href="#">Understanding Digital Privacy in 2024</a></h5>
+                                                        <div class="post-meta">
+                                                            <span><i class="bi bi-clock"></i> Feb 3, 2024</span>
+                                                            <span><i class="bi bi-chat-dots"></i> 18 Comments</span>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section><!-- /Author Profile Section -->
+
+    </main>
+
+    <?php require 'Partials/footer.php'; ?>
 
 </body>
 

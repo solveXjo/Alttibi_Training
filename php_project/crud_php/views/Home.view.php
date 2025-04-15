@@ -178,7 +178,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
 
-    <? require 'Partials/footer.php'; ?> 
+    <?php include 'Partials/footer.php'; ?>
 
 </body>
 

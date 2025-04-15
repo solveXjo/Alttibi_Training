@@ -107,7 +107,7 @@ session_start();
                             <?php endforeach; ?>
                         <?php endif; ?>
 
-                        <form method="post" action="../../comment.php" class="comment-form">
+                        <form method="post" action="comment.php" class="comment-form">
                             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                             <textarea name="comment" placeholder="Write a comment..."></textarea>
                             <button type="submit" name="submit" class="btn comment-btn">Post</button>

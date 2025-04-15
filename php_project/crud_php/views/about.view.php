@@ -2,6 +2,8 @@
     <title>About</title>
 </head>
 <body>
+    <?php include 'Partials/nav.php'; ?>
+    <?php include 'Partials/pageTitle.php'; ?>
       <!-- About Section -->
       <section id="about" class="about section">
 

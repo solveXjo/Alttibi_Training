@@ -45,8 +45,9 @@ $pageInfo = getPageDetails();
 <html lang="en">
 
 <head>
-    <?php include 'Partials/head.php'; ?>
+<?php include 'Partials/head.php' ?>
 
+</head>
 <body>
 <div class="page-title">
     <div class="container d-lg-flex justify-content-between align-items-center">

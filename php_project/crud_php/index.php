@@ -18,7 +18,7 @@ else if($uri === "/home"){
     require "controllers/Home.php";
 }
 else if($uri === "/profile"){
-    require "controllers/profile.php";
+    require "profile.php";
 }
 else if($uri === "/Login"){
     require "views/auth/Login.view.php";
@@ -26,10 +26,18 @@ else if($uri === "/Login"){
 else if($uri === "/about"){
     require "controllers/about.php";
 }
+else if($uri === "/comment"){
+    require "comment.php";
+}
+else if($uri === "/contact"){
+    require "contact.php";
+}
 else{
     require 'views/auth/index.view.php';
     exit();
 }
+
+
 
 // header("Location: views/auth/index.view.php");
 // exit();

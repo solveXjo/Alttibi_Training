@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $db = new Database(require 'config.php');
 
 

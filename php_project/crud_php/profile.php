@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-require 'models/UserRepository.php';
+require_once 'models/UserRepository.php';
 
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: /Login");
     exit();
 }
 require_once "config.php";
@@ -15,7 +15,6 @@ $db = new Database(require 'config.php');
 $userRepo = new UserRepository($db);
 $userId = $_SESSION['user_id'];
 
-// Initialize variables
 $success = '';
 $error = '';
 
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle account deletion
         if ($userRepo->deleteUser($userId)) {
             session_destroy();
-            header("Location: login.php");
+            header("Location: /Login");
             exit();
         } else {
             $error = "Failed to delete account.";
@@ -82,8 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             $error = "An error occurred: " . $e->getMessage();
         }
-    } elseif (isset($_POST['name']) || isset($_POST['age']) || isset($_POST['email']) || isset($_POST['bio']) || isset($_POST['location'])) {
+    } elseif (isset($_POST['name']) || isset($_POST['age']) || isset($_POST['email']) || isset($_POST['bio']) || isset($_POST['location']) || isset($_POST['title'])) {
         $name = $_POST['name'];
+        $title = $_POST['title'];
         $age = $_POST['age'];
         $email = $_POST['email'];
         $bio = $_POST['bio'];
@@ -106,21 +106,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($age > 80 || $age < 18) {
             $error = "the age must be between 18 and 80";
         } else {
-            $userRepo->updateUser(userId: $userId, name: $name, age: $age, email: $email, bio: $bio, location: $location);
+            $userRepo->updateUser(userId: $userId, name: $name, title: $title, age: $age, email: $email, bio: $bio, location: $location);
             $success = "Profile updated successfully!";
         }
     }
 
     $user = $userRepo->getUserById($userId);
 
-    // Store messages in session for redirect
     $_SESSION['profile_update_success'] = $success;
     $_SESSION['profile_update_error'] = $error;
-    header("Location: profile.php");
+    header("Location: /profile");
     exit();
 }
 
-// Check for messages from redirect
 if (isset($_SESSION['profile_update_success'])) {
     $success = $_SESSION['profile_update_success'];
     unset($_SESSION['profile_update_success']);
@@ -131,4 +129,4 @@ if (isset($_SESSION['profile_update_error'])) {
 }
 
 $user = $userRepo->getUserById($userId);
-require 'views/profile.view.php';
+require 'profile.view.php';

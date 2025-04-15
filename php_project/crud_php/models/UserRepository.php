@@ -7,14 +7,14 @@ class UserRepository {
     }
 
     public function getUserById($userId) {
-        $query = "
-            SELECT 
+        $query = "SELECT 
                 users.id, 
                 users.name, 
                 users.age, 
                 users.email, 
                 users.bio, 
                 users.location,
+                users.title,
                 media.image_path 
             FROM users 
             LEFT JOIN media ON users.id = media.user_id 
@@ -32,9 +32,10 @@ class UserRepository {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateUser($userId, $name, $age, $email, $password = null, $bio = null, $location = null) {
+    public function updateUser($userId, $name, $title, $age, $email, $password = null, $bio = null, $location = null) {
         $query = "UPDATE users SET 
-            name = :name, 
+            name = :name,
+            title = :title, 
             age = :age, 
             email = :email,
             bio = :bio,
@@ -42,6 +43,7 @@ class UserRepository {
         
         $params = [
             ':name' => $name, 
+            ':title' => $title,
             ':age' => $age, 
             ':email' => $email,
             ':bio' => $bio,
@@ -73,7 +75,6 @@ class UserRepository {
     }
 
     public function updateImage($userId, $imagePath) {
-        // Check if image exists for this user
         $checkQuery = "SELECT COUNT(*) FROM media where user_id = :user_id";
         $checkStmt = $this->db->connection->prepare($checkQuery);
         $checkStmt->execute(['user_id' => $userId]);
