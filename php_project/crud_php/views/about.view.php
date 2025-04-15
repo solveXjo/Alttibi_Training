@@ -46,6 +46,8 @@
 
   </div>
 
+  <?php include 'team.php'; ?>
+
 </div>
 </section><!-- /About Section -->
 

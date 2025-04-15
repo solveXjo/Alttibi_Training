@@ -1,6 +1,8 @@
 
 <head>
     <?php include 'Partials/head.php'; ?>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
   
@@ -19,10 +21,10 @@
         <p><strong>Email:</strong> <span>info@example.com</span></p>
       </div>
       <div class="social-links d-flex mt-4">
-        <a href=""><i class="fa fa-twitter"></i></a>
-        <a href=""><i class="fa fa-facebook"></i></a>
-        <a href=""><i class="fa fa-instagram"></i></a>
-        <a href=""><i class="fa fa-linkedin"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
 

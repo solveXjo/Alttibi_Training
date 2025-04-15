@@ -181,29 +181,6 @@
 
 
     <div class="container">
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <div class="cover-photo"></div>
-
-            <div class="profile-info">
-
-
-                <h1 class="profile-name"><?= htmlspecialchars($user['name'] ?? 'User') ?></h1>
-
-                <?php if (!empty($user['bio'])): ?>
-                    <div class="profile-bio"><?= htmlspecialchars($user['bio']) ?></div>
-                <?php endif; ?>
-
-                <?php if (!empty($user['location'])): ?>
-                    <div class="profile-location" style="color: var(--text-secondary); margin-bottom: 15px;">
-                        <i class="fa fa-map-marker"></i> <?= htmlspecialchars($user['location']) ?>
-                    </div>
-                <?php endif; ?>
-
-            </div>
-        </div>
-
-        <!-- Alerts -->
         <?php if (!empty($success)): ?>
             <div class="alert alert-success"><?= $success ?></div>
         <?php endif; ?>
@@ -212,7 +189,6 @@
         <?php endif; ?>
 
         <div class="profile-content">
-            <!-- Left Column - Profile Info -->
             <div class="profile-card">
                 <h3>About</h3>
                 <form method="post" action="" enctype="multipart/form-data">
@@ -540,23 +516,7 @@
 
     <main class="main">
 
-        <!-- Page Title -->
-        <div class="page-title">
-            <div class="breadcrumbs">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#"><i class="bi bi-house"></i> Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Category</a></li>
-                        <li class="breadcrumb-item active current">Author Profile</li>
-                    </ol>
-                </nav>
-            </div>
 
-            <div class="title-wrapper">
-                <h1>Author Profile</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-            </div>
-        </div><!-- End Page Title -->
 
         <!-- Author Profile Section -->
         <section id="author-profile" class="author-profile section">
@@ -586,10 +546,10 @@
 
                                 <div class="author-info">
                                     <h2><?= htmlspecialchars($user['name'] ?? 'User') ?></h2>
+
                                     <p class="designation"><?= htmlspecialchars($user['title'] ?? 'User') ?></p>
 
-                                    <div class="author-bio">
-                                        <?= htmlspecialchars($user['bio'] ?? '') ?> </div>
+
 
                                     <div class="author-stats d-flex justify-content-between text-center my-4">
                                         <div class="stat-item">
@@ -607,12 +567,17 @@
                                     </div>
 
                                     <div class="social-links">
-                                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                                        <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                                        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                                     </div>
+                                    <div class="profile-location mt-4">
+                                        <i class="fa fa-map-marker" style="color: #2d465e;"></i> <?= htmlspecialchars($user['location']) ?>
+                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
 
