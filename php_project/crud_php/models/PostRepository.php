@@ -72,7 +72,7 @@ class PostRepository {
         $stmt->execute(['email' => $email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function getMostLikedPosts($limit = 2) {
+    public function getMostLikedPosts($limit = 3) {
         $query = "SELECT * from posts ORDER BY likes DESC LIMIT ?";
         $stmt = $this->db->connection->prepare($query);
         $stmt->bindValue(1, $limit, PDO::PARAM_INT);

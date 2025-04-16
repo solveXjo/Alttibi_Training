@@ -614,8 +614,8 @@
                                                         <div class="post-category">Technology</div>
                                                         <h5><a href="#">The Future of AI in Everyday Computing</a></h5>
                                                         <div class="post-meta">
-                                                            <span><i class="bi bi-clock"></i> Jan 15, 2024</span>
-                                                            <span><i class="bi bi-chat-dots"></i> 24 Comments</span>
+                                                            <span><i class="fa fa-clock"></i> Jan 15, 2024</span>
+                                                            <span><i class="fa fa-comments"></i> 24 Comments</span>
                                                         </div>
                                                     </div>
                                                 </article>
@@ -630,8 +630,8 @@
                                                         <div class="post-category">Privacy</div>
                                                         <h5><a href="#">Understanding Digital Privacy in 2024</a></h5>
                                                         <div class="post-meta">
-                                                            <span><i class="bi bi-clock"></i> Feb 3, 2024</span>
-                                                            <span><i class="bi bi-chat-dots"></i> 18 Comments</span>
+                                                            <span><i class="fa fa-clock"></i> Feb 3, 2024</span>
+                                                            <span><i class="fa fa-comments"></i> 18 Comments</span>
                                                         </div>
                                                     </div>
                                                 </article>
