@@ -11,20 +11,20 @@ if($uri === "/" || $uri === "/index" || $uri == ""){
 }
 
 else if($uri === "/posts"){
-    require "controllers/Posts.php";
+    require "views/Posts.view.php";
 }
 
 else if($uri === "/home"){
-    require "controllers/Home.php";
+    require "views/Home.view.php";
 }
 else if($uri === "/profile"){
-    require "profile.php";
+    require "profile.view.php";
 }
 else if($uri === "/Login"){
     require "views/auth/Login.view.php";
 }
 else if($uri === "/about"){
-    require "controllers/about.php";
+    require "views/about.view.php";
 }
 else if($uri === "/comment"){
     require "comment.php";
@@ -34,7 +34,7 @@ else if($uri == "/contact"){
 }
 else if($uri === "/comment/edit"){
     if (isset($_POST['post_id'])) {
-        $_GET['post_id'] = $_POST['post_id']; // Pass post_id to GET for use in comment.php
+        $_GET['post_id'] = $_POST['post_id']; 
         require "comment.php?post_id=" . $_POST['post_id'];
     } else {
         echo "Error: post_id is not set.";
@@ -48,9 +48,7 @@ else if($uri == "/profile_edit"){
 else if($uri == "/category"){
     require "category.php";
 }
-else if($uri === "/contact"){
-    require "contact.php";
-}
+
 else{
     require 'views/auth/index.view.php';
     exit();

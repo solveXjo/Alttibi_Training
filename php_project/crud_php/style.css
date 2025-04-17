@@ -4654,3 +4654,99 @@ label {
 .blog-pagination li a:hover a {
   color: var(--contrast-color);
 }
+ .blog-pagination {
+            padding-top: 0;
+            color: color-mix(in srgb, var(--default-color), transparent 40%);
+        }
+
+        .blog-pagination ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .blog-pagination li {
+            margin: 0 5px;
+            transition: 0.3s;
+        }
+
+        .blog-pagination li a {
+            color: color-mix(in srgb, var(--default-color), transparent 40%);
+            padding: 7px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-pagination li a.active,
+        .blog-pagination li a:hover {
+            background: var(--default-color);
+            color: var(--contrast-color);
+        }
+
+        .blog-pagination li a.active a,
+        .blog-pagination li a:hover a {
+            color: var(--contrast-color);
+        }
+
+        .blog-posts .post-date {
+            background-color: var(--default-color);
+            color: var(--contrast-color);
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            text-transform: uppercase;
+            font-size: 13px;
+            padding: 6px 12px;
+            font-weight: 500;
+        }
+
+
+        .blog-pagination {
+          padding-top: 0;
+          color: color-mix(in srgb, var(--default-color), transparent 40%);
+      }
+
+      .blog-pagination ul {
+          display: flex;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+      }
+
+      .blog-pagination li {
+          margin: 0 5px;
+          transition: 0.3s;
+      }
+
+      .blog-pagination li a {
+          color: color-mix(in srgb, var(--default-color), transparent 40%);
+          padding: 7px 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .blog-pagination li a.active,
+      .blog-pagination li a:hover {
+          background: var(--default-color);
+          color: var(--contrast-color);
+      }
+
+      .blog-pagination li a.active a,
+      .blog-pagination li a:hover a {
+          color: var(--contrast-color);
+      }
+
+      .blog-posts .post-date {
+          background-color: var(--default-color);
+          color: var(--contrast-color);
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          text-transform: uppercase;
+          font-size: 13px;
+          padding: 6px 12px;
+          font-weight: 500;
+      }

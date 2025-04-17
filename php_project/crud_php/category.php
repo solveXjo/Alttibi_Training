@@ -1,89 +1,107 @@
-<sty?php
-    session_start();
-    ?>
+<?php
+session_start();
+require_once 'controllers/Posts.php'; // Include the file where $posts is defined
+$posts = $postRepo->getAllPosts();
+?>
 
-    <head>
-        <?php include 'Partials/head.php' ?>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-        <title>Category</title>
-        <style>
-
+<head>
+    <?php include 'Partials/head.php' ?>
+    <title>Category</title>
+    <style>
         .blog-pagination {
-        padding-top: 0;
-        color: color-mix(in srgb, var(--default-color), transparent 40%);
+            padding-top: 0;
+            color: color-mix(in srgb, var(--default-color), transparent 40%);
         }
 
         .blog-pagination ul {
-        display: flex;
-        padding: 0;
-        margin: 0;
-        list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style: none;
         }
 
         .blog-pagination li {
-        margin: 0 5px;
-        transition: 0.3s;
+            margin: 0 5px;
+            transition: 0.3s;
         }
 
         .blog-pagination li a {
-        color: color-mix(in srgb, var(--default-color), transparent 40%);
-        padding: 7px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            color: color-mix(in srgb, var(--default-color), transparent 40%);
+            padding: 7px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .blog-pagination li a.active,
         .blog-pagination li a:hover {
-        background: var(--accent-color);
-        color: var(--contrast-color);
+            background: var(--default-color);
+            color: var(--contrast-color);
         }
 
         .blog-pagination li a.active a,
         .blog-pagination li a:hover a {
-        color: var(--contrast-color);
+            color: var(--contrast-color);
         }
-        </style>
 
-    </head>
+        .blog-posts .post-date {
+            background-color: var(--default-color);
+            color: var(--contrast-color);
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            text-transform: uppercase;
+            font-size: 13px;
+            padding: 6px 12px;
+            font-weight: 500;
+        }
+    </style>
 
-    <body class="category-page">
+</head>
+
+<body class="category-page">
 
 
-        <?php include 'Partials/nav.php' ?>
-        <?php include 'Partials/pageTitle.php' ?>
+    <?php include 'Partials/nav.php' ?>
 
 
 
-        <main class="main">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <!-- Blog Posts Section -->
-                        <section id="blog-posts" class="blog-posts section">
 
-                            <div class="container">
-                                <div class="row gy-4">
+    <main class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Blog Posts Section -->
+                    <section id="blog-posts" class="blog-posts section">
 
+                        <div class="container">
+                            <div class="row gy-4">
+                                <?php foreach ($posts as $post) : ?>
                                     <div class="col-lg-6">
                                         <article class="position-relative h-100">
 
                                             <div class="post-img position-relative overflow-hidden">
-                                                <img src="assets/img/blog/blog-1.jpg" class="img-fluid" alt="">
-                                                <span class="post-date">December 12</span>
+                                                <img src="<?php
+                                                            if (isset($post['image_path'])) {
+                                                                echo $post['image_path'];
+                                                            } else {
+                                                                echo 'images/download.png';
+                                                            }
+                                                            ?>" class="img-fluid" alt="" style="max-width: 460px;">
+                                                <span class="post-date"><?= date("F j", strtotime($post["created_at"])) ?></span>
                                             </div>
 
                                             <div class="post-content d-flex flex-column">
 
-                                                <h3 class="post-title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</h3>
+                                                <h3 class="post-title"><?= htmlspecialchars($post["caption"]) ?></h3>
 
                                                 <div class="meta d-flex align-items-center">
                                                     <div class="d-flex align-items-center">
-                                                        <i class="fa fa-user"></i> <span class="ps-2">John Doe</span>
+                                                        <i class="fa fa-user"></i> <span class="ps-2"><?= htmlspecialchars($post["name"]) ?></span>
                                                     </div>
                                                     <span class="px-3 text-black-50">/</span>
                                                     <div class="d-flex align-items-center">
-                                                        <i class="fa fa-folder"></i> <span class="ps-2">Politics</span>
+                                                        <i class="fa fa-folder"></i> <span class="ps-2"><?= $post["category"] ?></span>
                                                     </div>
                                                 </div>
 
@@ -93,356 +111,121 @@
 
                                                 <hr>
 
-                                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="fa fa-arrow-right"></i></a>
 
                                             </div>
 
                                         </article>
                                     </div><!-- End post list item -->
+                                <?php endforeach; ?>
 
-                                    <div class="col-lg-6">
-                                        <article class="position-relative h-100">
 
-                                            <div class="post-img position-relative overflow-hidden">
-                                                <img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt="">
-                                                <span class="post-date">March 19</span>
-                                            </div>
 
-                                            <div class="post-content d-flex flex-column">
-
-                                                <h3 class="post-title">Nisi magni odit consequatur autem nulla dolorem</h3>
-
-                                                <div class="meta d-flex align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-person"></i> <span class="ps-2">Julia Parker</span>
-                                                    </div>
-                                                    <span class="px-3 text-black-50">/</span>
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-folder2"></i> <span class="ps-2">Economics</span>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
-                                                </p>
-
-                                                <hr>
-
-                                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="fa fa-arrow-right"></i></a>
-
-                                            </div>
-
-                                        </article>
-                                    </div><!-- End post list item -->
-
-                                    <div class="col-lg-6">
-                                        <article class="position-relative h-100">
-
-                                            <div class="post-img position-relative overflow-hidden">
-                                                <img src="assets/img/blog/blog-3.jpg" class="img-fluid" alt="">
-                                                <span class="post-date">June 24</span>
-                                            </div>
-
-                                            <div class="post-content d-flex flex-column">
-
-                                                <h3 class="post-title">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</h3>
-
-                                                <div class="meta d-flex align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-person"></i> <span class="ps-2">Maria Doe</span>
-                                                    </div>
-                                                    <span class="px-3 text-black-50">/</span>
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-folder2"></i> <span class="ps-2">Sports</span>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis.
-                                                </p>
-
-                                                <hr>
-
-                                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="fa fa-arrow-right"></i></a>
-
-                                            </div>
-
-                                        </article>
-                                    </div><!-- End post list item -->
-
-                                    <div class="col-lg-6">
-                                        <article class="position-relative h-100">
-
-                                            <div class="post-img position-relative overflow-hidden">
-                                                <img src="assets/img/blog/blog-4.jpg" class="img-fluid" alt="">
-                                                <span class="post-date">August 05</span>
-                                            </div>
-
-                                            <div class="post-content d-flex flex-column">
-
-                                                <h3 class="post-title">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</h3>
-
-                                                <div class="meta d-flex align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-person"></i> <span class="ps-2">Maria Doe</span>
-                                                    </div>
-                                                    <span class="px-3 text-black-50">/</span>
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-folder2"></i> <span class="ps-2">Sports</span>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae. Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a qui.
-                                                </p>
-
-                                                <hr>
-
-                                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="fa fa-arrow-right"></i></a>
-
-                                            </div>
-
-                                        </article>
-                                    </div><!-- End post list item -->
-
-                                    <div class="col-lg-6">
-                                        <article class="position-relative h-100">
-
-                                            <div class="post-img position-relative overflow-hidden">
-                                                <img src="assets/img/blog/blog-5.jpg" class="img-fluid" alt="">
-                                                <span class="post-date">September 17</span>
-                                            </div>
-
-                                            <div class="post-content d-flex flex-column">
-
-                                                <h3 class="post-title">Accusamus quaerat aliquam qui debitis facilis consequatur</h3>
-
-                                                <div class="meta d-flex align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-person"></i> <span class="ps-2">John Parker</span>
-                                                    </div>
-                                                    <span class="px-3 text-black-50">/</span>
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-folder2"></i> <span class="ps-2">Politics</span>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    In itaque assumenda aliquam voluptatem qui temporibus iusto nisi quia. Autem vitae quas aperiam nesciunt mollitia tempora odio omnis. Ipsa odit sit ut amet necessitatibus. Quo ullam ut corrupti autem consequuntur totam dolorem.
-                                                </p>
-
-                                                <hr>
-
-                                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="fa fa-arrow-right"></i></a>
-
-                                            </div>
-
-                                        </article>
-                                    </div><!-- End post list item -->
-
-                                    <div class="col-lg-6">
-                                        <article class="position-relative h-100">
-
-                                            <div class="post-img position-relative overflow-hidden">
-                                                <img src="assets/img/blog/blog-6.jpg" class="img-fluid" alt="">
-                                                <span class="post-date">December 07</span>
-                                            </div>
-
-                                            <div class="post-content d-flex flex-column">
-
-                                                <h3 class="post-title">Distinctio provident quibusdam numquam aperiam aut</h3>
-
-                                                <div class="meta d-flex align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-person"></i> <span class="ps-2">Julia White</span>
-                                                    </div>
-                                                    <span class="px-3 text-black-50">/</span>
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa fa-folder2"></i> <span class="ps-2">Economics</span>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    Expedita et temporibus eligendi enim molestiae est architecto praesentium dolores. Illo laboriosam officiis quis. Labore officia quia sit voluptatem nisi est dignissimos totam. Et voluptate et consectetur voluptatem id dolor magni impedit. Omnis dolores sit.
-                                                </p>
-
-                                                <hr>
-
-                                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="fa fa-arrow-right"></i></a>
-
-                                            </div>
-
-                                        </article>
-                                    </div><!-- End post list item -->
-
-                                </div>
                             </div>
-
-                        </section><!-- /Blog Posts Section -->
-                        <!-- Blog Pagination Section -->
-                        <section id="blog-pagination" class="blog-pagination section">
-
-                            <div class="container">
-                                <div class="d-flex justify-content-center">
-                                    <ul>
-                                        <?php
-                                        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                                        $totalPages = 10; // Replace with the actual total number of pages
-
-                                        // Previous button
-                                        if ($currentPage > 1) {
-                                            echo '<li><a href="?page=' . ($currentPage - 1) . '"><i class="fas fa-chevron-left"></i></a></li>';
-                                        } else {
-                                            echo '<li class="disabled"><a><i class="fas fa-chevron-left"></i></a></li>';
-                                        }
-
-                                        // Page numbers
-                                        for ($i = 1; $i <= $totalPages; $i++) {
-                                            if ($i == $currentPage) {
-                                                echo '<li><a href="#" class="active">' . $i . '</a></li>';
-                                            } else {
-                                                echo '<li><a href="?page=' . $i . '">' . $i . '</a></li>';
-                                            }
-                                        }
-
-                                        // Next button
-                                        if ($currentPage < $totalPages) {
-                                            echo '<li><a href="?page=' . ($currentPage + 1) . '"><i class="fas fa-chevron-right"></i></a></li>';
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </section><!-- /Blog Pagination Section -->
-
-                    </div>
-
-                    <div class="col-lg-4 sidebar">
-
-                        <div class="widgets-container">
-
-                            <!-- Blog Author Widget 2 -->
-                            <div class="blog-author-widget-2 widget-item">
-
-                                <div class="d-flex flex-column align-items-center">
-                                    <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="" style="max-width: 160px;">
-                                    <h4>Jane Smith</h4>
-                                    <div class="social-links">
-                                        <a href="https://x.com/#"><i class="fa fa-twitter-x"></i></a>
-                                        <a href="https://facebook.com/#"><i class="fa fa-facebook"></i></a>
-                                        <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                                        <a href="https://instagram.com/#"><i class="biu bi-linkedin"></i></a>
-                                    </div>
-
-                                    <p>
-                                        Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
-                                    </p>
-
-                                </div>
-                            </div><!--/Blog Author Widget 2 -->
-
-                            <!-- Search Widget -->
-                            <div class="search-widget widget-item">
-
-                                <h3 class="widget-title">Search</h3>
-                                <form action="">
-                                    <input type="text">
-                                    <button type="submit" title="Search"><i class="fa fa-search"></i></button>
-                                </form>
-
-                            </div><!--/Search Widget -->
-
-                            <!-- Recent Posts Widget -->
-                            <div class="recent-posts-widget widget-item">
-
-                                <h3 class="widget-title">Recent Posts</h3>
-
-                                <div class="post-item">
-                                    <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
-                                    <div>
-                                        <h4><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="assets/img/blog/blog-recent-2.jpg" alt="" class="flex-shrink-0">
-                                    <div>
-                                        <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="assets/img/blog/blog-recent-3.jpg" alt="" class="flex-shrink-0">
-                                    <div>
-                                        <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="assets/img/blog/blog-recent-4.jpg" alt="" class="flex-shrink-0">
-                                    <div>
-                                        <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="assets/img/blog/blog-recent-5.jpg" alt="" class="flex-shrink-0">
-                                    <div>
-                                        <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                            </div><!--/Recent Posts Widget -->
-
-                            <!-- Tags Widget -->
-                            <div class="tags-widget widget-item">
-
-                                <h3 class="widget-title">Tags</h3>
-                                <ul>
-                                    <li><a href="#">App</a></li>
-                                    <li><a href="#">IT</a></li>
-                                    <li><a href="#">Business</a></li>
-                                    <li><a href="#">Mac</a></li>
-                                    <li><a href="#">Design</a></li>
-                                    <li><a href="#">Office</a></li>
-                                    <li><a href="#">Creative</a></li>
-                                    <li><a href="#">Studio</a></li>
-                                    <li><a href="#">Smart</a></li>
-                                    <li><a href="#">Tips</a></li>
-                                    <li><a href="#">Marketing</a></li>
-                                </ul>
-
-                            </div><!--/Tags Widget -->
-
                         </div>
+
+                    </section><!-- /Blog Posts Section -->
+
+
+                </div>
+
+                <div class="col-lg-4 sidebar">
+
+                    <div class="widgets-container">
+
+                        <!-- Blog Author Widget 2 -->
+                        <div class="blog-author-widget-2 widget-item">
+
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                <h4>Jane Smith</h4>
+                                <div class="social-links">
+                                    <a href="https://x.com/#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://facebook.com/#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://instagram.com/#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://linkedin.com/#" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+
+                                <p>
+                                    Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+                                </p>
+
+                            </div>
+                        </div><!--/Blog Author Widget 2 -->
+
+                        <div class="categories-widget widget-item">
+
+                            <h3 class="widget-title">Categories</h3>
+                            <ul class="mt-3">
+                                <li><a href="#">General <span>(25)</span></a></li>
+                                <li><a href="#">Lifestyle <span>(12)</span></a></li>
+                                <li><a href="#">Travel <span>(5)</span></a></li>
+                                <li><a href="#">Design <span>(22)</span></a></li>
+                                <li><a href="#">Creative <span>(8)</span></a></li>
+                                <li><a href="#">Educaion <span>(14)</span></a></li>
+                            </ul>
+
+                        </div><!--/Categories Widget -->
+
 
                     </div>
 
                 </div>
+                <!-- Blog Pagination Section -->
+                <section id="blog-pagination" class="blog-pagination section">
+
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            <ul>
+                                <?php
+                                $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                                $totalPages = 10; // Replace with the actual total number of pages
+
+                                // Previous button
+                                if ($currentPage > 1) {
+                                    echo '<li><a href="?page=' . ($currentPage - 1) . '"><i class="fas fa-chevron-left"></i></a></li>';
+                                } else {
+                                    echo '<li class="disabled"><a><i class="fas fa-chevron-left"></i></a></li>';
+                                }
+
+                                // Page numbers
+                                for ($i = 1; $i <= $totalPages; $i++) {
+                                    if ($i == $currentPage) {
+                                        echo '<li><a href="#" class="active">' . $i . '</a></li>';
+                                    } else {
+                                        echo '<li><a href="?page=' . $i . '">' . $i . '</a></li>';
+                                    }
+                                }
+
+                                // Next button
+                                if ($currentPage < $totalPages) {
+                                    echo '<li><a href="?page=' . ($currentPage + 1) . '"><i class="fas fa-chevron-right"></i></a></li>';
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                </section><!-- /Blog Pagination Section -->
             </div>
 
-        </main>
+        </div>
+
+    </main>
+
+    <?= include 'Partials/footer.php' ?>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="fa fa-arrow-up"></i></a>
 
 
-        <!-- Scroll Top -->
-        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="fa fa-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
 
-        <!-- Vendor JS Files -->
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-        <script src="assets/vendor/aos/aos.js"></script>
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+</body>
 
-        <!-- Main JS File -->
-        <script src="assets/js/main.js"></script>
-
-    </body>
-
-    </html>
+</html>

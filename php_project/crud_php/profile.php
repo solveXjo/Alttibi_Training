@@ -130,5 +130,4 @@ if (isset($_SESSION['profile_update_error'])) {
 
 $user = $userRepo->getUserById($userId);
 // require 'profile_edit.php';
-require 'profile.view.php';
 

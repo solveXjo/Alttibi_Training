@@ -62,4 +62,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $mostLikedPosts = $postRepo->getMostLikedPosts(5);
-require 'views/Home.view.php';

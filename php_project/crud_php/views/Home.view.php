@@ -1,4 +1,6 @@
 <?php
+
+require "controllers/Home.php";
 if (!isset($_SESSION['user_id'])) {
     header("Location: /index");
     exit();

@@ -1,8 +1,8 @@
 <?php
 session_start();
+require 'controllers/Posts.php'; 
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
 <title>Posts</title>
 
@@ -382,7 +382,7 @@ session_start();
                 <?php endif; ?>
                 <div>
                 <h4 class="mb-1">
-                  <a href="blog-details.html"><?= htmlspecialchars($recent["name"]) ?></a>
+                  <a href="blog-details.html"><?= htmlspecialchars($recent["caption"]) ?></a>
                 </h4>
                 <time datetime="<?= htmlspecialchars($recent["created_at"]) ?>">
                   <?= date('F j, Y', strtotime($recent["created_at"])) ?>

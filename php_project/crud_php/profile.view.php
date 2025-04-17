@@ -1,3 +1,5 @@
+<?php require "profile.php"; ?>
+
 <head>
     <?php include 'partials/head.php'; ?>
     <title><?= htmlspecialchars($user['name'] ?? 'User') ?> | Profile</title>

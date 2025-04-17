@@ -66,4 +66,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment'])) {
 $posts = $postRepo->getAllPosts();
 $getMostRecentPosts = $postRepo -> getRecentPosts(5);
 
-require 'views/Posts.view.php';

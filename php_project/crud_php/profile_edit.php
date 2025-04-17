@@ -316,7 +316,7 @@ $user = $userRepo->getUserById($userId);
                     <h3>Profile Picture</h3>
                     <form method="post" enctype="multipart/form-data" class="image-upload-form">
                         <label for="image" class="btn" style="margin-top: 70px;">
-                            <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>" />
+                            <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>" style="max-width: 120;"/>
                         </label>
                         <input type="file" id="image" name="image" accept="image/*" style="display: none;"
                             onchange="this.form.submit()">
