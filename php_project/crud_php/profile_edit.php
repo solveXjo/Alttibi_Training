@@ -301,7 +301,7 @@ $user = $userRepo->getUserById($userId);
 
 <body>
     <?php require 'partials/nav.php'; ?>
-    <?php include "Partials/pageTitle.php"; ?>
+    <!-- <?//php include "Partials/pageTitle.php"; ?> -->
     <div class="container">
         <?php if (!empty($success)): ?>
             <div class="alert alert-success"><?= $success ?></div>
@@ -654,6 +654,8 @@ $user = $userRepo->getUserById($userId);
             </div>
         </div>
     </div>
+
+    <?php require 'Partials/footer.php'; ?>
 
 
 
