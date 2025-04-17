@@ -45,6 +45,9 @@ else if($uri == "/profile_edit"){
     require "profile_edit.php";
 }
 
+else if($uri == "/category"){
+    require "category.php";
+}
 else if($uri === "/contact"){
     require "contact.php";
 }

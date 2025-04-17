@@ -73,10 +73,8 @@ if (!isset($_SESSION['user_id'])) {
 
                 <div class="swiper init-swiper">
 
-                    <!-- Include Swiper CSS -->
                     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-                    <!-- Swiper Configuration Script -->
                     <script type="application/json" class="swiper-config">
                         {
                             "loop": true,
@@ -266,7 +264,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <ul class="trending-post">
                                             <?php foreach ($mostLikedPosts as $index => $post): ?>
                                             <li>
-                                                <a href="blog-details.html">
+                                                <a href="#">
                                                     <span class="number"><?= $index + 1 ?></span>
                                                     <h3><?= htmlspecialchars($post['caption']) ?></h3>
                                                     <span class="author"><?= htmlspecialchars($post['name']) ?></span>

@@ -38,13 +38,13 @@
         <ul>
           <li><a href="/home" class="active">Home</a></li>
           <li><a href="/about">About</a></li>
-          <li><a href="category.html">Category</a></li>
+          <li><a href="/category">Category</a></li>
           <li><a href="blog-details.html">Blog Details</a></li>
           <li><a href="author-profile.html">Author Profile</a></li>
           <li class="dropdown"><a href="#"><span>Pages</span> <i class="fa fa-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="about.html">About</a></li>
-              <li><a href="category.html">Category</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/category">Category</a></li>
               <li><a href="blog-details.html">Blog Details</a></li>
               <li><a href="/posts">Posts</a></li>
               <li><a href="search-results.html">Search Results</a></li>

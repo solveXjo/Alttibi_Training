@@ -34,6 +34,11 @@ function getPageDetails()
             'heading' => 'Edit Profile',
             'breadcrumb' => 'Edit Profile'
         ],
+        'category' => [
+            'title' => isset($posts) && isset($posts['category']) ? $posts['category'] . ' - Altibbi' : 'Category - Altibbi',
+            'heading' => isset($posts['category']) ? $posts['category'] : 'Category',
+            'breadcrumb' => 'Category'
+        ]
 
     ];
 
