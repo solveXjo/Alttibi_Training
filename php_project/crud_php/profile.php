@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bio = $_POST['bio'];
         $location = $_POST['location'];
 
-        if ($location === "" || $location === null) {
+        if ($location == "" || $location == NULL) {
             $location = 'Palestine';
         }
 
@@ -129,4 +129,6 @@ if (isset($_SESSION['profile_update_error'])) {
 }
 
 $user = $userRepo->getUserById($userId);
+// require 'profile_edit.php';
 require 'profile.view.php';
+

@@ -3033,6 +3033,33 @@ section,
 .about .features-boxes .feature-box:hover h3 a {
   color: var(--accent-color);
 }
+.fst-italic {
+  font-style: italic !important;
+}
+
+.about .content .who-we-are {
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: 
+color-mix(in srgb, var(--default-color), transparent 40%);
+}
+.about .content h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+  display: inline-block;
+  font-family: bootstrap-icons !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .about .video-box {
   position: relative;
@@ -4565,7 +4592,7 @@ label {
             max-height: 300px;
             object-fit: cover;
         }
-        .action-btn {
+        /* .action-btn {
             color: #65676B;
             cursor: pointer;
             padding: 8px;
@@ -4573,7 +4600,7 @@ label {
         }
         .action-btn:hover {
             background-color: #f0f2f5;
-        }
+        } */
         .post-btn {
             font-weight: 600;
         }

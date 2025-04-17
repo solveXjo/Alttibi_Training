@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_comment'])) {
 
     if ($postId !== false && !empty($comment)) {
         $postRepo->addComment($postId, $_SESSION['user_id'], $comment, $parentId);
-        header("Location: Posts.php");
+        header("Location: /posts");
         exit();
     }
 }
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment'])) {
 
     if ($commentId !== false && !empty($newText)) {
         $postRepo->updateComment($commentId, $newText);
-        header("Location: Posts.php");
+        header("Location: /posts");
         exit();
     }
 }
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
 
     if ($postId !== false) {
         $postRepo->removePost($postId);
-        header("Location: Posts.php");
+        header("Location: /posts");
         exit();
     }
 }
@@ -58,11 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment'])) {
 
     if ($commentId !== false) {
         $postRepo->deleteComment($commentId);
-        header("Location: Posts.php");
+        header("Location: /posts");
         exit();
     }
 }
 
 $posts = $postRepo->getAllPosts();
+$getMostRecentPosts = $postRepo -> getRecentPosts(5);
 
 require 'views/Posts.view.php';

@@ -58,57 +58,11 @@ if (!isset($_SESSION['user_id'])) {
         }
     </script>
 
-    <div class="container py-4">
 
 
 
-        <div class="create-post-card card mb-4">
-            <div class="m-3 p-4">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <!-- Category Selector -->
-                    <div class="mb-3">
-                        <select id="category" name="category" class="form-select" required>
-                            <option value="" disabled selected>Select a category</option>
-                            <option value="gaming" <?= ($_POST['category'] ?? '') === 'gaming' ? 'selected' : '' ?>>Gaming</option>
-                            <option value="entertainment" <?= ($_POST['category'] ?? '') === 'entertainment' ? 'selected' : '' ?>>Entertainment</option>
-                            <option value="sports" <?= ($_POST['category'] ?? '') === 'sports' ? 'selected' : '' ?>>Sports</option>
-                            <option value="health" <?= ($_POST['category'] ?? '') === 'health' ? 'selected' : '' ?>>Health</option>
-                            <option value="education" <?= ($_POST['category'] ?? '') === 'education' ? 'selected' : '' ?>>Education</option>
-                            <option value="Programming" <?= ($_POST['category'] ?? '') === 'Programming' ? 'selected' : '' ?>>Programming</option>
-                            <option value="Lifestyle" <?= ($_POST['category'] ?? '') === 'Lifestyle' ? 'selected' : '' ?>>Lifestyle</option>
-                            <option value="Tech" <?= ($_POST['category'] ?? '') === 'Tech' ? 'selected' : '' ?>>Tech</option>
-                            <option value="Business" <?= ($_POST['category'] ?? '') === 'Business' ? 'selected' : '' ?>>Business</option>
-                            <option value="others" <?= ($_POST['category'] ?? 'others') === 'others' ? 'selected' : '' ?>>Others</option>
-                        </select>
-                    </div>
+        
 
-                    <!-- Post Content -->
-                    <div class="mb-3">
-                        <textarea class="form-control post-input" name="caption" id="caption"
-                            placeholder="Share your thoughts..." rows="3" required><?= htmlspecialchars($_POST['caption'] ?? '') ?></textarea>
-                    </div>
-
-                    <!-- Post Actions -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('imageUpload').click()">
-                                <i class="fa fa-image"></i> Photo
-                            </button>
-                            <input type="file" id="imageUpload" name="image" class="d-none" accept="image/*">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary post-button">Post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
-
-
-
-
-    </div>
 
     <main class="main">
 
@@ -195,6 +149,47 @@ if (!isset($_SESSION['user_id'])) {
             </div>
 
         </section><!-- /Slider Section -->
+
+        <div class="container create-post-card card mb-4">
+            <div class="m-3 p-4">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <!-- Category Selector -->
+                    <div class="mb-3">
+                        <select id="category" name="category" class="form-select" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="gaming" <?= ($_POST['category'] ?? '') === 'gaming' ? 'selected' : '' ?>>Gaming</option>
+                            <option value="entertainment" <?= ($_POST['category'] ?? '') === 'entertainment' ? 'selected' : '' ?>>Entertainment</option>
+                            <option value="sports" <?= ($_POST['category'] ?? '') === 'sports' ? 'selected' : '' ?>>Sports</option>
+                            <option value="health" <?= ($_POST['category'] ?? '') === 'health' ? 'selected' : '' ?>>Health</option>
+                            <option value="education" <?= ($_POST['category'] ?? '') === 'education' ? 'selected' : '' ?>>Education</option>
+                            <option value="Programming" <?= ($_POST['category'] ?? '') === 'Programming' ? 'selected' : '' ?>>Programming</option>
+                            <option value="Lifestyle" <?= ($_POST['category'] ?? '') === 'Lifestyle' ? 'selected' : '' ?>>Lifestyle</option>
+                            <option value="Tech" <?= ($_POST['category'] ?? '') === 'Tech' ? 'selected' : '' ?>>Tech</option>
+                            <option value="Business" <?= ($_POST['category'] ?? '') === 'Business' ? 'selected' : '' ?>>Business</option>
+                            <option value="others" <?= ($_POST['category'] ?? 'others') === 'others' ? 'selected' : '' ?>>Others</option>
+                        </select>
+                    </div>
+
+                    <!-- Post Content -->
+                    <div class="mb-3">
+                        <textarea class="form-control post-input" name="caption" id="caption"
+                            placeholder="Share your thoughts..." rows="3" required><?= htmlspecialchars($_POST['caption'] ?? '') ?></textarea>
+                    </div>
+
+                    <!-- Post Actions -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('imageUpload').click()">
+                                <i class="fa fa-image"></i> Photo
+                            </button>
+                            <input type="file" id="imageUpload" name="image" class="d-none" accept="image/*">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary post-button">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- Trending Category Section -->
         <section id="trending-category" class="trending-category section">

@@ -79,6 +79,14 @@ class PostRepository {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getRecentPosts($limit = 5){
+        $query = "SELECT * from posts order by created_at desc limit ?";
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function addLike($userId, $postId) {
         // Check if user already liked
         if (!$this->hasUserLikedPost($userId, $postId)) {

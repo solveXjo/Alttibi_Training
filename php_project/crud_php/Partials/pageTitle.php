@@ -29,6 +29,12 @@ function getPageDetails()
             'heading' => 'Profile',
             'breadcrumb' => 'Profile'
         ],
+        'profile_edit' => [
+            'title' => 'Profile Edit - Altibbi',
+            'heading' => 'Edit Profile',
+            'breadcrumb' => 'Edit Profile'
+        ],
+
     ];
 
     return $pages[$currentPage] ?? [

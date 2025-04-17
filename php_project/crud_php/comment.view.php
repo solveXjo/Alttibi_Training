@@ -8,10 +8,10 @@
 </head>
 
 <body class='background'>
-    <?php require 'Partials/nav.php'; ?>
+    <?php require 'Partials/nav.php';
+          require 'Partials/pageTitle.php' ?>
 
     <div class="">
-        <h2>Comments</h2>
         <?php if (!empty($comments)) : ?>
             <ul class="list-group">
                 <?php foreach ($comments as $comment) : ?>
@@ -36,7 +36,8 @@
                                         </button>
                                     </form>
 
-                                    <form method="POST" action="comment.php?post_id=<?= $postId ?>" style="display:inline;">
+                                    <form method="POST" action="/comment" style="display:inline;"></form>
+                                        <input type="hidden" name="post_id" value="<?= $postId ?>">
                                         <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
                                         <button type="submit" name="delete_comment" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">
                                             <i class="fa fa-trash">Delete</i>

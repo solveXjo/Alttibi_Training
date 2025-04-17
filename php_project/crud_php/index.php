@@ -29,6 +29,19 @@ else if($uri === "/about"){
 else if($uri === "/comment"){
     require "comment.php";
 }
+else if($uri === "/comment/edit"){
+    if (isset($_POST['post_id'])) {
+        $_GET['post_id'] = $_POST['post_id']; // Pass post_id to GET for use in comment.php
+        require "comment.php?post_id=" . $_POST['post_id'];
+    } else {
+        echo "Error: post_id is not set.";
+        exit();
+    }
+}
+else if($uri == "/profile_edit"){
+    require "profile_edit.php";
+}
+
 else if($uri === "/contact"){
     require "contact.php";
 }

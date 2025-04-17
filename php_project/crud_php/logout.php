@@ -1,5 +1,5 @@
 <?php
 
 session_destroy();
-header("Location: login.php");
+header("Location: views/auth/index.view.php");
 exit();

@@ -63,6 +63,7 @@
             </ul>
           </li>
           <li><a href="contact.php">Contact</a></li>
+          <li ><a style="color: red; margin-left:50px;" href="/">Logout</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
