@@ -201,9 +201,11 @@
                                         <label for="image" class="btn" style="margin-top: 70px;">
                                             <img src="uploads/<?= !empty($user['image_path']) ? htmlspecialchars($user['image_path']) : 'default.png' ?>" />
                                         </label>
+
                                         <input type="file" id="image" name="image" accept="image/*" style="display: none;"
                                             onchange="this.form.submit()">
                                     </form>
+                                        
 
                                 </div>
 

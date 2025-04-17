@@ -1,7 +1,7 @@
 <?php
 function getPageDetails()
 {
-    $currentPage = str_replace('.php', '', basename($_SERVER['PHP_SELF']));
+    $currentPage = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
     $pages = [
         'about' => [

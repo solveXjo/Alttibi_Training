@@ -29,6 +29,9 @@ else if($uri === "/about"){
 else if($uri === "/comment"){
     require "comment.php";
 }
+else if($uri == "/contact"){
+    require "contact.php";
+}
 else if($uri === "/comment/edit"){
     if (isset($_POST['post_id'])) {
         $_GET['post_id'] = $_POST['post_id']; // Pass post_id to GET for use in comment.php
