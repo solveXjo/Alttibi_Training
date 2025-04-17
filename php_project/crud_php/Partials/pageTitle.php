@@ -36,7 +36,7 @@ function getPageDetails()
         ],
         'category' => [
             'title' => isset($posts) && isset($posts['category']) ? $posts['category'] . ' - Altibbi' : 'Category - Altibbi',
-            'heading' => isset($posts['category']) ? $posts['category'] : 'Category',
+            'heading' =>'Category',
             'breadcrumb' => 'Category'
         ]
 
