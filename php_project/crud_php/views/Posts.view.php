@@ -38,7 +38,7 @@ require 'controllers/Posts.php';
 
 
 <body>
-  <?php require 'Partials/nav.php'; ?>
+  <?php include 'Partials/nav.php'; ?>
   <?php include 'Partials/pageTitle.php'; ?>
 
 
